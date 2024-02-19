@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://unpkg.com/p5.collide2d"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+
+
+    <!-- CSS -->
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        /* Go Back To Main Button CSS */
+
+        #levelsToMainButton {
+            background-color: rgb(0, 120, 202);
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 30px;
+            border-radius: 15px;
+            border-color: rgb(0, 67, 202);
+            margin-top: 37.5%;
+            margin-left: 2.5%;
+        }
+
+
+        /* DIV Box of all level buttons CSS */
+
+        #levelButtonDiv {
+            Display: flex;
+            flex-direction: row;
+        }
+
+        /* Level 1 Button CSS */
+
+        #level1Button {
+            background-color: rgb(0, 120, 202);
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 30px;
+            border-radius: 7.5px;
+            border-color: rgb(0, 67, 202);
+            margin-left: 12.5%;
+            margin-top: 5%;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <div id="levelButtonDiv">
+        <!-- Go to level 1 when you press the icon/button -->
+        <button onclick="level1Button()" id="level1Button">1</button>
+
+        <!-- Go to level 2 when you press the icon/button -->
+        <!-- <button onclick="level2Button()" id="level2Button">2</button> -->
+
+        <!-- Go to level 3 when you press the icon/button -->
+        <!-- <button onclick="level3Button()" id="level3Button">3</button> -->
+
+        <!-- Go to level 4 when you press the icon/button -->
+        <!-- <button onclick="level4Button()" id="level1Button">4</button> -->
+
+        <!-- Go to level 5 when you press the icon/button -->
+        <!-- <button onclick="level5Button()" id="level5Button">5</button> -->
+
+        <!-- Go to level 6 when you press the icon/button -->
+        <!-- <button onclick="level6Button()" id="level6Button">6</button> -->
+
+        <!-- Go to level 7 when you press the icon/button -->
+        <!-- <button onclick="level7Button()" id="level7Button">7</button> -->
+        
+        <!-- Go to level 4 when you press the icon/button -->
+        <!-- <button onclick="level8Button()" id="level8Button">8</button> -->
+    </div>  
+
+    <!-- Back To Main Button -->
+    <button onclick="levelsToMain()" id="levelsToMainButton">Go Back to the Main Page</button>
+    
+    <script> 
+        w = window.innerWidth
+        h = window.innerHeight
+            
+        function level1Button() {
+            location.href = "level1.html"
+        }
+
+
+        function levelsToMain() {
+            location.href = "MainMenu.html"
+        }
+
+        function setup() {
+            createCanvas(w,h)
+        }
+
+        function draw() {
+        }
+    </script>
+</body>
+</html>

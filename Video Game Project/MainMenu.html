@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://unpkg.com/p5.collide2d"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+
+
+    <!-- CSS -->
+    <style>
+        body {
+            Display: flex;
+            flex-direction: column;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            background-color: black;
+            /* background-image: url("https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?cs=srgb&dl=pexels-francesco-ungaro-998641.jpg&fm=jpg"); */
+        }
+
+        #startButton {
+            width: 12.5%;
+            height: 7.5%;
+            background-color: rgb(0, 120, 202);
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 30px;
+            border-radius: 15px;
+            border-color: rgb(0, 67, 202);
+            margin-top: 5%;
+            margin-left: 44%;
+        }
+
+        #helpButton {
+            width: 12.5%;
+            height: 7.5%;
+            background-color: rgb(0, 120, 202);
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 30px;
+            border-radius: 15px;
+            border-color: rgb(0, 67, 202);
+            margin-top: 1.5%;
+            margin-left: 44%;
+        }
+
+        #titleDiv {
+            margin-bottom: 1.5%;
+            margin-left: 42.5%;
+        }
+
+        #titleHeading {
+            color: rgb(230, 119, 0);
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 60px;
+        }
+    </style>
+
+
+</head>
+<body>
+    <div id="titleDiv">
+        <h1 id="titleHeading">Solar Jump</h1>
+    </div>
+    <!-- Start Button of the Main Menu -->
+    <button onclick="startGame()" id="startButton">Start Game</button>
+
+    <!-- Help Button -->
+    <button onclick="help()" id="helpButton">Help</button>
+    
+    <script> 
+        w = window.innerWidth
+        h = window.innerHeight
+        
+
+        // Start the game when they click the "Start Game" button
+        function startGame() {
+            location.href = "LevelsPage.html"
+        }
+
+        // Send the user to the Help Page when they click the "Help" Button
+        function help() {
+            location.href = "HelpPage.html"
+        }
+
+        function setup() {
+            createCanvas(w,h)
+        }
+
+        function draw() {
+        }
+    </script>
+</body>
+</html>
