@@ -18,7 +18,7 @@
             margin: 0px;
             padding: 0px;
             overflow: hidden;
-            background-color: black;
+            background-image: url("Game Space Background.png");
         }
 
         /* Go Back To Main Button CSS */
@@ -61,6 +61,10 @@
     <div id="levelButtonDiv">
         <!-- Go to level 1 when you press the icon/button -->
         <button onclick="level1Button()" id="level1Button">1</button>
+        <!-- Level 1 Planet: Mercury -->
+        <!-- <div id="level1Planet">
+            <img src="Mercury.png">
+        </div> -->
 
         <!-- Go to level 2 when you press the icon/button -->
         <!-- <button onclick="level2Button()" id="level2Button">2</button> -->
@@ -100,12 +104,6 @@
             location.href = "MainMenu.html"
         }
 
-        function setup() {
-            createCanvas(w,h)
-        }
-
-        function draw() {
-        }
     </script>
 </body>
 </html>

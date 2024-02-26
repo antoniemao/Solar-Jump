@@ -18,7 +18,7 @@
             margin: 0px;
             padding: 0px;
             overflow: hidden;
-            background-color: black;
+            background-image: url("Game Space Background.png");
         }
 
         /* Go Back Button CSS */
@@ -36,13 +36,15 @@
         /* Controls CSS */
 
         #controlTextDiv {
+            width: 37.5%;
+            height: 15%;
             Display: flex;
             flex-direction: column;
             position: absolute;
             border-radius: 15px;
             background-color: rgb(230, 119, 0);
             margin-top: 3%;
-            margin-left: 15%;
+            margin-left: 10%;
         }
 
         #controlText1 {
@@ -78,15 +80,15 @@
         /* Objective Text CSS */
 
         #objectiveTextDiv {
-            width: 30%;
+            width: 37.5%;
             height: 25%;
             Display: flex;
             flex-direction: column;
             position: absolute;
             border-radius: 15px;
             background-color: rgb(230, 119, 0);
-            margin-top: 22%;
-            margin-left: 15%;
+            margin-top: 12.5%;
+            margin-left: 10%;
         }
 
         #objectiveTextHeading {
@@ -108,15 +110,15 @@
         /* Tokens Text CSS */
 
         #tokensTextDiv {
-            width: 25%;
-            height: 15%;
+            width: 37.5%;
+            height: 12.5%;
             Display: flex;
             flex-direction: column;
             position: absolute;
             border-radius: 15px;
             background-color: rgb(230, 119, 0);
             margin-top: 12.5%;
-            margin-left: 15%;
+            margin-left: 52.5%;
         }
 
         #tokensTextHeading {
@@ -133,6 +135,44 @@
             font-family: 'Pixelify Sans', sans-serif;
             font-size: 17.5px;
             color: white;
+        }
+
+        /* Tips Text CSS */
+
+        #tipsTextDiv {
+            width: 37.5%;
+            height: 15%;
+            Display: flex;
+            flex-direction: column;
+            position: absolute;
+            border-radius: 15px;
+            background-color: rgb(230, 119, 0);
+            margin-top: 3%;
+            margin-left: 52.5%;
+        }
+
+        #tipsText1 {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 17.5px;
+            color: white;
+            margin-bottom: -1.5%;
+        }
+
+        #tipsText2 {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 17.5px;
+            color: white;
+            margin-bottom: -1.5%;
+        }
+
+        #tipsTextHeading {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 25px;
+            color: white;
+            margin-bottom: -0.5%;
+            font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
         }
 
     </style>
@@ -155,30 +195,30 @@
     <!-- Objectives/what you're supposed to do -->
     <div id="objectiveTextDiv">
         <h1 id="objectiveTextHeading">Objectives</h1>
-        <p id="objectiveText">The objective of this game "Solar Jump" is to complete all of the 8 levels of this platform game. Each of the 8 levels represent each of the 8 planets of the Solar System. You start at Level 1 and you HAVE to complete the level to move on to the next which means you cannot skip levels. To complete a level, you jump to each platform until you reach the top platform where you'll find an astronaut. Once you're ON the platform where the astronaut is, you can click on him to move on to the next level.</p>
+        <p id="objectiveText">The objective of this game is to complete all of the 8 levels of this platform game. Each of the 8 levels represent each of the 8 planets of the Solar System. You start at Level 1 and HAVE to complete the level to move on to the next which means you cannot skip levels. To complete a level, you jump to each platform until you reach the top platform where you'll find an astronaut. Once you're ON the platform where the astronaut is, you can click on him to move on to the next level. Once you complete the level, you will not be able to play the level again.
+        </p>
     </div>
 
     <!-- Tokens -->
     <div id="tokensTextDiv">
         <h1 id="tokensTextHeading">Tokens</h1>
-        <p id="tokensText">There will be tokens on some of the platforms and if you're player touches it, then you will receive a random buff/debuff or nothing will happen.</p>
+        <p id="tokensText">There will be tokens on some of the platforms and if your character touches it, then you will receive a random effect.</p>
+    </div>
+
+    <!-- Tips -->
+    <div id="tipsTextDiv">
+        <h1 id="tipsTextHeading">Tips</h1>
+        <p id="tipsText1">1. Hold the "Spacebar" key to jump as high as you can.</p>
+        <p id="tipsText2">2. While on a platform, hold the "Spacebar" key if you want to fall off one of the platforms.</p>
     </div>
 
     <!-- Help Button -->
     <button onclick="helpToMain()" id="helpToMainButton">Go Back to the Main Page</button>
     
     <script> 
-        w = window.innerWidth
-        h = window.innerHeight
-        
-
         // Start the game when they click the "Start Game" button
         function helpToMain() {
             location.href = "MainMenu.html"
-        }
-
-        function setup() {
-            createCanvas(w,h)
         }
     </script>
 </body>
