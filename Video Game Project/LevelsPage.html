@@ -26,10 +26,10 @@
         #levelsToMainButton {
             background-color: rgb(0, 120, 202);
             font-family: 'Pixelify Sans', sans-serif;
-            font-size: 30px;
+            font-size: 35px;
             border-radius: 15px;
             border-color: rgb(0, 67, 202);
-            margin-top: 37.5%;
+            margin-top: 45%;
             margin-left: 2.5%;
         }
 
@@ -41,16 +41,51 @@
             flex-direction: row;
         }
 
-        /* Level 1 Button CSS */
+        /* Level 1 Div CSS */
+        #level1Div {
+            position: absolute;
+            width: 12.5%;
+            height: 25%;
+            margin-left: 12.5%;
+            margin-top: 5%;
+            flex-direction: column;
+        }
 
+        /* Level 1 Button CSS */
         #level1Button {
             background-color: rgb(0, 120, 202);
             font-family: 'Pixelify Sans', sans-serif;
             font-size: 30px;
             border-radius: 7.5px;
             border-color: rgb(0, 67, 202);
-            margin-left: 12.5%;
+            margin-left: 42.5%;
             margin-top: 5%;
+        }   
+
+        /* Level 1 Planet CSS */
+        #level1PlanetDiv {
+            flex-direction: column;
+            width: 75%;
+            height: 75%;
+            margin-top: 5%;
+            margin-left: 25%;
+        }
+
+        #level1PlanetIMG {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            margin-top: 15%;
+            z-index: 1;
+        }
+
+        #level1AstronautIMG {
+            position: absolute;
+            width: 25%;
+            height: 25%;
+            margin-top: 5%;
+            margin-left: 22.5%;
+            z-index: 2;
         }
 
     </style>
@@ -59,12 +94,15 @@
 </head>
 <body>
     <div id="levelButtonDiv">
-        <!-- Go to level 1 when you press the icon/button -->
-        <button onclick="level1Button()" id="level1Button">1</button>
-        <!-- Level 1 Planet: Mercury -->
-        <!-- <div id="level1Planet">
-            <img src="Mercury.png">
-        </div> -->
+        <div id="level1Div">
+            <!-- Go to level 1 when you press the icon/button -->
+            <button onclick="level1Button()" id="level1Button">1</button>
+            <!-- Level 1 Planet: Mercury -->
+            <div id="level1PlanetDiv">
+                <img src="Left Mercury Astronaut (NPC).png" id="level1AstronautIMG">
+                <img src="Mercury.png" id="level1PlanetIMG">
+            </div>
+        </div> 
 
         <!-- Go to level 2 when you press the icon/button -->
         <!-- <button onclick="level2Button()" id="level2Button">2</button> -->
@@ -91,10 +129,10 @@
     <!-- Back To Main Button -->
     <button onclick="levelsToMain()" id="levelsToMainButton">Go Back to the Main Page</button>
     
-    <script> 
+    <script>
         w = window.innerWidth
         h = window.innerHeight
-            
+
         function level1Button() {
             location.href = "level1.html"
         }

@@ -20,7 +20,6 @@
             overflow: hidden;
         }
 
-        
     </style>
 
 
@@ -31,18 +30,46 @@
         w = window.innerWidth
         h = window.innerHeight
 
+
         // ---
 
 
         // Character's values
-        
+        let astronautPlayer
+
         // Character's X and Y position
         var cX = (1/30 * w)
         var cY = (0.755 * h)
     
         // Character's width & height
-        var cW = (0.02 * w)
+        var cW = (0.035 * w)
         var cH = (0.075 * h)
+
+
+        // Left Side NPC's values
+        let leftMercuryNPC 
+        
+        // Left NPC's X and Y position
+        var lmX = (0.1 * w)
+        var lmY = (0.025 * h)
+        
+        // Left NPC's width & height 
+        var lmW = (0.035 * w)
+        var lmH = (0.075 * h)
+        
+        // Right Side NPC's values
+        let rightMercuryNPC 
+        
+        // Right NPC's X and Y position
+        var rmX = (1/1.07 * w)
+        var rmY = (0.025 * h)
+        
+        // Right NPC's width & height 
+        var rmW = (0.035 * w)
+        var rmH = (0.075 * h)
+
+        // See if they pressed the NPC (Right Side) or not
+        var trackRightNPC = 0 
 
         // ---
         
@@ -69,6 +96,14 @@
 
 
         // ---
+
+
+        // Settings value
+        var settingsTracker = 0
+
+
+        // ---
+
 
 
         // PLATFORM VALUES
@@ -109,6 +144,24 @@
         var p4_l1W = (0.1 * w)
         var p4_l1H = (0.017 * h)
 
+        // Platform 4.2
+        var p4_l2X = (1/10 * w)
+        var p4_l2Y = (0.3 * h)
+        var p4_l2W = (0.1 * w)
+        var p4_l2H = (0.017 * h)
+
+        // Platform 4.3
+        var p4_l3X = (1/4.25 * w)
+        var p4_l3Y = (0.2 * h)
+        var p4_l3W = (0.1 * w)
+        var p4_l3H = (0.017 * h)
+
+        // Platform 4.4
+        var p4_l4X = (1/10 * w)
+        var p4_l4Y = (0.1 * h)
+        var p4_l4W = (0.1 * w)
+        var p4_l4H = (0.017 * h)
+
         // Platform 5
         var p5X = (1/1.75 * w)
         var p5Y = (0.5 * h)
@@ -120,6 +173,31 @@
         var p5_r1Y = (0.4 * h)
         var p5_r1W = (0.1 * w)
         var p5_r1H = (0.017 * h)
+
+        // Platform 5.2 (Token #2)
+        var p5_r2X = (1/1.175 * w)
+        var p5_r2Y = (0.475 * h)
+        var p5_r2W = (0.08 * w)
+        var p5_r2H = (0.017 * h)
+
+        // Platform 5.3
+        var p5_r3X = (1/1.15 * w)
+        var p5_r3Y = (0.3 * h)
+        var p5_r3W = (0.1 * w)
+        var p5_r3H = (0.017 * h)
+
+        // Platform 5.4
+        var p5_r4X = (1/1.4 * w)
+        var p5_r4Y = (0.2 * h)
+        var p5_r4W = (0.1 * w)
+        var p5_r4H = (0.017 * h)
+
+        // Platform 5.5
+        var p5_r5X = (1/1.15 * w)
+        var p5_r5Y = (0.1 * h)
+        var p5_r5W = (0.1 * w)
+        var p5_r5H = (0.017 * h)
+
 
         // ---
 
@@ -134,6 +212,14 @@
         var hitToken1 = false
         var hitToken1Tracker = 0
 
+
+        // Token 2
+        var t2X = (1/1.09 * w)
+        var t2Y = (0.45 * h)
+        var t2D = (50)
+        // Token 2's collison
+        var hitToken2 = false
+        var hitToken2Tracker = 0 
 
         // TOKEN EFFECTS 
         // BUFFS
@@ -240,7 +326,26 @@
 
         // ---
 
+
+        // Preload images
+        function preload() {
+            // Astronaut Player
+            rightAstronautPlayer = loadImage('Player Astronaut.png')
+            leftAstronautPlayer = loadImage('Walking Left Player Astronaut.png')
+
+            // Mercury Astronaut NPC
+            // (Left Side)
+            leftMercuryNPC = loadImage('Left Mercury Astronaut (NPC).png')
+
+            // Mercury Astronaut NPC
+            // (Right Side)
+            rightMercuryNPC = loadImage('Right Mercury Astronaut (NPC).png')
+        }
         
+
+        // ---
+
+
         // Ground/Platforms 
 
 
@@ -281,6 +386,24 @@
             rect(p4_l1X,p4_l1Y,p4_l1W,p4_l1H)
         }
 
+        // Platform #4.2
+        function platform4_l2() {
+            fill('rgba(78, 33, 33, 1)')
+            rect(p4_l2X,p4_l2Y,p4_l2W,p4_l2H)
+        }
+
+        // Platform #4.3
+        function platform4_l3() {
+            fill('rgba(78, 33, 33, 1)')
+            rect(p4_l3X,p4_l3Y,p4_l3W,p4_l3H)
+        }
+        
+        // Platform #4.4
+        function platform4_l4() {
+            fill('rgba(78, 33, 33, 1)')
+            rect(p4_l4X,p4_l4Y,p4_l4W,p4_l4H)
+        }
+
         // ---
 
         // Platform #5
@@ -295,6 +418,29 @@
             rect(p5_r1X,p5_r1Y,p5_r1W,p5_r1H)
         }
 
+        // Platform #5.2 (Token #2)
+        function platform5_r2() {
+            fill('yellow')
+            rect(p5_r2X,p5_r2Y,p5_r2W,p5_r2H)
+        }
+
+        // Platform #5.3
+        function platform5_r3() {
+            fill('rgba(77, 33, 33, 1)')
+            rect(p5_r3X,p5_r3Y,p5_r3W,p5_r3H)
+        }
+
+        // Platform #5.4
+        function platform5_r4() {
+            fill('rgba(77, 33, 33, 1)')
+            rect(p5_r4X,p5_r4Y,p5_r4W,p5_r4H)
+        }
+
+        // Platform #5.5
+        function platform5_r5() {
+            fill('rgba(77, 33, 33, 1)')
+            rect(p5_r5X,p5_r5Y,p5_r5W,p5_r5H)
+        }
 
         // Tokens
 
@@ -314,20 +460,20 @@
 
 
                     // Generate a random number to see which random effect they will receive
-                    let randomTokenEffect = (Math.floor(Math.random() * (tokenEffectsArr.length)))
+                    let randomToken1Effect = (Math.floor(Math.random() * (tokenEffectsArr.length)))
                     // Switch their "a" & "d" control
-                    if (tokenEffectsArr[randomTokenEffect] == "controlDebuff") {
+                    if (tokenEffectsArr[randomToken1Effect] == "controlDebuff") {
                         debuffControl = true
                     }
                     // TP the player back to the ground/start
-                    else if (tokenEffectsArr[randomTokenEffect] == "tpDebuff") {
+                    else if (tokenEffectsArr[randomToken1Effect] == "tpDebuff") {
                         cX = w/30
                         cY = (0.65 * h)
                     }
                     // Decrease their jump power back to normal 
-                    else if (tokenEffectsArr[randomTokenEffect] == "jumpDebuff") {
+                    else if (tokenEffectsArr[randomToken1Effect] == "jumpDebuff") {
                         // If their jump power was increased before, then change it back to normal
-                        if (lift == -17) {
+                        if (lift == -14.5) {
                             lift = -13
                             window.alert("CHANGED")
                         }  
@@ -337,11 +483,11 @@
                         }
                     }
                     // Nothing happens
-                    else if (tokenEffectsArr[randomTokenEffect] == "nothing") {
+                    else if (tokenEffectsArr[randomToken1Effect] == "nothing") {
                         window.alert('NOTHING')
                     }
                     // Change their controls back to normal 
-                    else if (tokenEffectsArr[randomTokenEffect] == "controlBuff") {
+                    else if (tokenEffectsArr[randomToken1Effect] == "controlBuff") {
                         // Check if their control was reversed previously 
                         if (debuffControl == true) {
                             debuffControl == false 
@@ -353,11 +499,12 @@
                         }
                     }
                     // Increase their jump power
-                    else if (tokenEffectsArr[randomTokenEffect] == "jumpBuff") {
-                        lift = -15
+                    else if (tokenEffectsArr[randomToken1Effect] == "jumpBuff") {
+                        lift = -14.5
                     }
                 }
             }
+            // If they didn't touch the token, then don't make it disappear 
             else if (hitToken1 == false && hitToken1Tracker == 0) {
                 fill('yellow')
                 noStroke()
@@ -365,9 +512,76 @@
             }
         }
 
+        // Token #2
+        function token2() {
+            hitToken2 = collideRectCircle(cX,cY,cW,cH,t2X,t2Y,t2D)
+            if (hitToken2 == true) {
+                // If the player collides with the token, then track the amount of times the player collides with the tokens. 
+                hitToken2Tracker += 1
+                // Make the token transparent/disappear
+                fill('rgba(0,0,0,0)')
+                noStroke()
+                circle(t2X,t2Y,t2D)
+                // Give them the effect ONLY one time 
+                if (hitToken2Tracker == 1) {
+                    // NOTE: Alert the user what effect they received when they collide with the token 
+
+
+                    // Generate a random number to see which random effect they will receive
+                    let randomToken2Effect = (Math.floor(Math.random() * (tokenEffectsArr.length)))
+                    // Switch their "a" & "d" control
+                    if (tokenEffectsArr[randomToken2Effect] == "controlDebuff") {
+                        debuffControl = true
+                    }
+                    // TP the player back to the ground/start
+                    else if (tokenEffectsArr[randomToken2Effect] == "tpDebuff") {
+                        cX = w/30
+                        cY = (0.65 * h)
+                    }
+                    // Decrease their jump power back to normal 
+                    else if (tokenEffectsArr[randomToken2Effect] == "jumpDebuff") {
+                        // If their jump power was increased before, then change it back to normal
+                        if (lift == -14.5) {
+                            lift = -13
+                            window.alert("CHANGED")
+                        }  
+                        // If their jump power wasn't increased before, then nothing happens
+                        else {
+                            window.alert("NOTHING CHANGED")
+                        }
+                    }
+                    // Nothing happens
+                    else if (tokenEffectsArr[randomToken2Effect] == "nothing") {
+                        window.alert('NOTHING')
+                    }
+                    // Change their controls back to normal 
+                    else if (tokenEffectsArr[randomToken2Effect] == "controlBuff") {
+                        // Check if their control was reversed previously 
+                        if (debuffControl == true) {
+                            debuffControl == false 
+                            window.alert("CONTROL REVERSED")
+                        }
+                        // If their controls wasn't reversed before, then nothing happens
+                        else {
+                            window.alert("NO CONTROL")
+                        }
+                    }
+                    // Increase their jump power
+                    else if (tokenEffectsArr[randomToken2Effect] == "jumpBuff") {
+                        lift = -14.5
+                    }
+                }
+            }
+            // If they didn't touch the token, then don't make it disappear 
+            else if (hitToken2 == false && hitToken2Tracker == 0) {
+                fill('yellow')
+                noStroke()
+                circle(t2X,t2Y,t2D)
+            }
+        }
+
         function draw() {
-            clear()
-            fill('red') 
+            clear() 
             // Gravity
             jumpUp()
             gravity()
@@ -377,7 +591,24 @@
             moveRight()
 
             // Player
-            // circle(cX,cY,cD)
+            // Make the player face the other way when they're walking to the left. 
+
+            // If the player doesn't have the debuff control AND they're walking left then make the astronaut face to the left. 
+            if (keyIsDown(65) && debuffControl == false) {
+                image(leftAstronautPlayer,cX,cY,cW,cH)
+            }
+
+            // If the player does have the debuff control AND they're walking left then make the astronaut face to the left. 
+            else if (keyIsDown(68) && debuffControl == true) {
+                image(leftAstronautPlayer,cX,cY,cW,cH)
+            }
+            
+            // If they're not walking to the left
+            else {
+                image(rightAstronautPlayer,cX,cY,cW,cH)
+            }
+            noStroke()
+            fill('rgba(0,0,0,0)')
             rect(cX,cY,cW,cH)
 
             // Ground/starting platform
@@ -386,10 +617,7 @@
             // Platform 1
             platform1() 
 
-            // Token 1
-            token1()
-
-            // Prevent the player from falling down if they're on the platform (1).
+            // Prevent the player from falling down if they're on the platform.
             // This means: if the player's X coordinates is greater than or equal to the platform's left side (edge) AND less than or equal to the platform's right side (edge) AND the player's Y coordinates is greater than or equal to the platform's top then stop the player from falling through the platform.
             if ((p1X <= cX + cW) && (cX - cW <= p1X + p1W - cW) && (cY + cH >= p1Y) && (cY + cH <= p1Y + p1H) && jump == false) {
                 // Make the character stay at the same height when they land on the platform
@@ -403,7 +631,7 @@
             // Platform 2
             platform2()
 
-            // Prevent the player from falling down if they're on the platform (2).
+            // Prevent the player from falling down if they're on the platform.
             if ((p2X <= cX + cW) && (cX - cW <= p2X + p2W - cW) && (cY + cH >= p2Y) && (cY + cH <= p2Y + p2H) && jump == false) {
                 // Make the character stay at the same height when they land on the platform
                 cY = cY
@@ -416,7 +644,7 @@
             // Platform 3
             platform3() 
             
-            // Prevent the player from falling down if they're on the platform (3).
+            // Prevent the player from falling down if they're on the platform.
             if ((p3X <= cX + cW) && (cX - cW <= p3X + p3W - cW) && (cY + cH >= p3Y) && (cY + cH <= p3Y + p3H) && jump == false) {
                 // Make the character stay at the same height when they land on the platform
                 cY = cY
@@ -426,10 +654,13 @@
                 jumpTracker = 0
             }   
 
+            // Token 1
+            token1()
+
             // Platform 4
             platform4() 
 
-            // Prevent the player from falling down if they're on the platform (3).
+            // Prevent the player from falling down if they're on the platform.
             if ((p4X <= cX + cW) && (cX - cW <= p4X + p4W - cW) && (cY + cH >= p4Y) && (cY + cH <= p4Y + p4H) && jump == false) {
                 // Make the character stay at the same height when they land on the platform
                 cY = cY
@@ -442,7 +673,7 @@
             // Platform 5 
             platform5()
 
-            // Prevent the player from falling down if they're on the platform (3).
+            // Prevent the player from falling down if they're on the platform.
             if ((p5X <= cX + cW) && (cX - cW <= p5X + p5W - cW) && (cY + cH >= p5Y) && (cY + cH <= p5Y + p5H) && jump == false) {
                 // Make the character stay at the same height when they land on the platform
                 cY = cY
@@ -458,7 +689,7 @@
             // Platform 4.1 
             platform4_l1() 
             
-            // Prevent the player from falling down if they're on the platform (3).
+            // Prevent the player from falling down if they're on the platform.
             if ((p4_l1X <= cX + cW) && (cX - cW <= p4_l1X + p4_l1W - cW) && (cY + cH >= p4_l1Y) && (cY + cH <= p4_l1Y + p4_l1H) && jump == false) {
                 // Make the character stay at the same height when they land on the platform
                 cY = cY
@@ -468,10 +699,60 @@
                 jumpTracker = 0
             }   
 
+            // Platform 4.2 
+            platform4_l2()
+
+            // Prevent the player from falling down if they're on the platform.
+            if ((p4_l2X <= cX + cW) && (cX - cW <= p4_l2X + p4_l2W - cW) && (cY + cH >= p4_l2Y) && (cY + cH <= p4_l2Y + p4_l2H) && jump == false) {
+                // Make the character stay at the same height when they land on the platform
+                cY = cY
+                // Stop them from falling down
+                velocity = 0
+                // Reset jump tracker to let them jump when they land on the platform
+                jumpTracker = 0
+            }   
+
+            // Platform 4.3 
+            platform4_l3()
+
+            // Prevent the player from falling down if they're on the platform.
+            if ((p4_l3X <= cX + cW) && (cX - cW <= p4_l3X + p4_l3W - cW) && (cY + cH >= p4_l3Y) && (cY + cH <= p4_l3Y + p4_l3H) && jump == false) {
+                // Make the character stay at the same height when they land on the platform
+                cY = cY
+                // Stop them from falling down
+                velocity = 0
+                // Reset jump tracker to let them jump when they land on the platform
+                jumpTracker = 0
+            }   
+
+            // Platform 4.4
+            platform4_l4()
+
+            // Prevent the player from falling down if they're on the platform.
+            if ((p4_l4X <= cX + cW) && (cX - cW <= p4_l4X + p4_l4W - cW) && (cY + cH >= p4_l4Y) && (cY + cH <= p4_l4Y + p4_l4H) && jump == false) {
+                // Make the character stay at the same height when they land on the platform
+                cY = cY
+                // Stop them from falling down
+                velocity = 0
+                // Reset jump tracker to let them jump when they land on the platform
+                jumpTracker = 0
+            }     
+            
+            // Left Side NPC  
+            image(leftMercuryNPC,lmX,lmY,lmW,lmH)
+
+            // Create dialogue if their mouse is on the NPC and they pressed it 
+            // if ((mouse position is on NPC) AND (character is on the platform the NPC is on))
+            if ( ( ((lmX <= mouseX) && (lmX + lmW >= mouseX)) && ((lmY <= mouseY) && (lmY + lmH >= mouseY)) && mouseIsPressed === true ) && ( (p4_l4X <= cX + cW) && (cX - cW <= p4_l4X + p4_l4W - cW) && (cY + cH >= p4_l4Y) && (cY + cH <= p4_l4Y + p4_l4H) && jump == false )) {
+                // Reset mouseIsPressed to false, because if it's kept true then the if statement will run even if their mouse is hovering the NPC (AFTER THEY PRESSED IT ONCE)
+                mouseIsPressed = false
+                location.href = "LevelsPage.html"
+            }
+
             // Platform 5 (Right side) will lead to the decoy NPC
             platform5_r1()
 
-            // Prevent the player from falling down if they're on the platform (3).
+            // Prevent the player from falling down if they're on the platform.
             if ((p5_r1X <= cX + cW) && (cX - cW <= p5_r1X + p5_r1W - cW) && (cY + cH >= p5_r1Y) && (cY + cH <= p5_r1Y + p5_r1H) && jump == false) {
                 // Make the character stay at the same height when they land on the platform
                 cY = cY
@@ -481,7 +762,274 @@
                 jumpTracker = 0
             }   
 
+            // Platform 5.2 (Token #2)
+            platform5_r2()
+
+            // Token 2
+            token2()
+
+            // Prevent the player from falling down if they're on the platform.
+            if ((p5_r2X <= cX + cW) && (cX - cW <= p5_r2X + p5_r2W - cW) && (cY + cH >= p5_r2Y) && (cY + cH <= p5_r2Y + p5_r2H) && jump == false) {
+                // Make the character stay at the same height when they land on the platform
+                cY = cY
+                // Stop them from falling down
+                velocity = 0
+                // Reset jump tracker to let them jump when they land on the platform
+                jumpTracker = 0
+            }   
+
+            // Platform 5.3 
+            platform5_r3()
+
+            // Prevent the player from falling down if they're on the platform.
+            if ((p5_r3X <= cX + cW) && (cX - cW <= p5_r3X + p5_r3W - cW) && (cY + cH >= p5_r3Y) && (cY + cH <= p5_r3Y + p5_r3H) && jump == false) {
+                // Make the character stay at the same height when they land on the platform
+                cY = cY
+                // Stop them from falling down
+                velocity = 0
+                // Reset jump tracker to let them jump when they land on the platform
+                jumpTracker = 0
+            }   
+
+            // Platform 5.4
+            platform5_r4()
+
+            // Prevent the player from falling down if they're on the platform.
+            if ((p5_r4X <= cX + cW) && (cX - cW <= p5_r4X + p5_r4W - cW) && (cY + cH >= p5_r4Y) && (cY + cH <= p5_r4Y + p5_r4H) && jump == false) {
+                // Make the character stay at the same height when they land on the platform
+                cY = cY
+                // Stop them from falling down
+                velocity = 0
+                // Reset jump tracker to let them jump when they land on the platform
+                jumpTracker = 0
+            }   
+
+            // Platform 5.5
+            platform5_r5()
+
+            // Prevent the player from falling down if they're on the platform.
+            if ((p5_r5X <= cX + cW) && (cX - cW <= p5_r5X + p5_r5W - cW) && (cY + cH >= p5_r5Y) && (cY + cH <= p5_r5Y + p5_r5H) && jump == false) {
+                // Make the character stay at the same height when they land on the platform
+                cY = cY
+                // Stop them from falling down
+                velocity = 0
+                // Reset jump tracker to let them jump when they land on the platform
+                jumpTracker = 0
+            }   
+
+            // Right Side NPC (Decoy)  
+            image(rightMercuryNPC,rmX,rmY,rmW,rmH)
+
+            // Create dialogue if their mouse is on the NPC, they pressed it and they aren't currently talking to the NPC (to prevent from creating multiple dialogue boxes)
+            // if ((mouse position is on NPC) AND (character is on the platform the NPC is on))
+            if ( ( ((rmX <= mouseX) && (rmX + rmW >= mouseX)) && ((rmY <= mouseY) && (rmY + rmH >= mouseY)) && mouseIsPressed === true ) && ( (p5_r5X <= cX + cW) && (cX - cW <= p5_r5X + p5_r5W - cW) && (cY + cH >= p5_r5Y) && (cY + cH <= p5_r5Y + p5_r5H) && jump == false ) && trackRightNPC == 0) {
+                noLoop()
+
+                // Reset mouseIsPressed to false, because if it's kept true then the if statement will run even if their mouse is hovering the NPC (AFTER THEY PRESSED IT ONCE)
+                mouseIsPressed = false
+
+                // Add 1 to the tracker so they can't click it multiple times
+                trackRightNPC += 1
+
+                // Create DIV for dialogue box
+                let dialogueDiv = createDiv()
+                
+                // Location of DIV
+                dialogueDiv.position(0.25 * w, 0.25 * h)
+
+                // DIV size
+                dialogueDiv.size(0.5 * w, 0.5 * h)
+
+                // Style the DIV
+                dialogueDiv.style('background-color','black')
+                dialogueDiv.style('border-radius','10px')
+                
+                // Create the dialogue text
+                let dialogueText = createP('Hey there astronaut! You know I have actually been wandering this planet for ages, and let me tell you, I have an exciting and fun story. Ages ago, I met these weird space aliens but these aliens then attacked me for no reason! I was able to single-handedly defeat those aliens with nothing but my own fists! Cool right? Alright, I do not want to hold you back. You can go now.')
+
+                // Style the text
+                dialogueText.style('font-family','Pixelify Sans')
+                dialogueText.style('color','white')
+                dialogueText.style('font-size','24px')
+                dialogueText.id('dialogueText')
+
+                // Make the DIV the parent of the text (p)
+                dialogueText.parent(dialogueDiv)
+                
+                // Create a button to close the dialogue 
+                let dialogueButton = createButton('X')
+
+                // Make the button run a function when they click it
+                dialogueButton.mouseClicked(closeDialogue)
+                dialogueButton.size(0.025 * w, 0.035 * h)
+                dialogueButton.position(0.475 * w, 0.467 * h)
+
+                dialogueButton.style('color','red') 
+                dialogueButton.style('font-size','24px')
+                dialogueButton.style('font-family','Pixelify Sans')
+                dialogueButton.style('border-radius','10px')
+
+                dialogueButton.parent(dialogueDiv)
+
+                // Function to close the dialogoue 
+                function closeDialogue() {
+                    // Put the button at a random position in the DIV box and change the dialogue text when they press the close button
+                    if (trackRightNPC == 1) {
+                        // Change the dialogue
+                        document.getElementById('dialogueText').innerHTML = 'Wait, actually I just remembered another story. Have I ever told you about this time when I met weird creatures that looked like aliens. When I encountered these aliens, they started attacking me and I have no idea why. Thankfully, I was able to dodge their attacks and defeat them with my barehands. Kinda cool right? I will let you go now. Safe travels!'
+
+                        // Move the button to a random position in the dialogue box
+                        dialogueButton.position(random(0, 0.475 * w), random(0, 0.467 * h))
+
+                        // Add 1 to the tracker 
+                        trackRightNPC += 1
+                    }
+                    else if (trackRightNPC == 2) {
+                        // Change the dialogue
+                        document.getElementById('dialogueText').innerHTML = 'You do not want to leave? Why?'
+
+                        // Move the button to a random position in the dialogue box
+                        dialogueButton.position(random(0, 0.475 * w), random(0, 0.467 * h))
+
+                        // Add 1 to the tracker 
+                        trackRightNPC += 1
+                    }
+                    else if (trackRightNPC == 3) {
+                        // Change the dialogue
+                        document.getElementById('dialogueText').innerHTML = 'You want me to tell more stories?'
+
+                        // Move the button to a random position in the dialogue box
+                        dialogueButton.position(random(0, 0.475 * w), random(0, 0.467 * h))
+
+                        // Add 1 to the tracker 
+                        trackRightNPC += 1
+                    }
+                    else if (trackRightNPC == 4) {
+                        // Change the dialogue
+                        document.getElementById('dialogueText').innerHTML = 'Well, I do not have any more stories that I can tell.'
+
+                        // Move the button to a random position in the dialogue box
+                        dialogueButton.position(random(0, 0.475 * w), random(0, 0.467 * h))
+
+                        // Add 1 to the tracker 
+                        trackRightNPC += 1
+                    }
+                    else if (trackRightNPC == 5) {
+                        // Change the dialogue
+                        document.getElementById('dialogueText').innerHTML = 'Please leave.'
+
+                        // Move the button to a random position in the dialogue box
+                        dialogueButton.position(random(0, 0.475 * w), random(0, 0.467 * h))
+
+                        // Add 1 to the tracker 
+                        trackRightNPC += 1
+                    }
+                    else if (trackRightNPC == 6) {
+                        // Change the dialogue
+                        document.getElementById('dialogueText').innerHTML = 'I am begging you to leave. Like I said, I have no more stories to tell you. '
+
+                        // Move the button to a random position in the dialogue box
+                        dialogueButton.position(random(0, 0.475 * w), random(0, 0.467 * h))
+
+                        // Add 1 to the tracker 
+                        trackRightNPC += 1
+                    }
+                    // Close the Div box for real now
+                    else if (trackRightNPC == 7) {
+                        dialogueDiv.remove()
+                        trackRightNPC = 0
+                        loop()
+                    }
+                }
+            } // Close the if statement for pressing the NPC w
+            
+            // Create a settings menu for them to leave to the main menu 
+            // Only create the button if the tracker is equal to 0 so it only creates it ONE time and not infinitely  
+            if (settingsTracker == 0) {
+                // Add one to the tracker to stop it from creating multiple buttons
+                settingsTracker += 1
+
+                // Create the button
+                let settingsButton = createButton('⚙')
+                settingsButton.position(0.955 * w, 0.935 * h)
+                settingsButton.size(0.035 * w, 0.0475 * h)
+
+                // Make the button run a function when they click it 
+                settingsButton.mouseClicked(settingsMenu)
+
+                // Style the button
+                settingsButton.style('background-color','rgb(0, 120, 202)')
+                settingsButton.style('border-color','rgb(0, 120, 202)')
+                settingsButton.style('color','white')
+                settingsButton.style('font-weight','bold')
+                settingsButton.style('font-size','32px')
+                settingsButton.style('border-radius','50%')
+
+                // Function to open the settings menu
+                function settingsMenu() {
+                    noLoop()
+                    // Create the button only one time
+                    if (settingsTracker == 1) {
+                        settingsTracker += 1
+
+                        // Create the resume button
+                        let settingsResumeB = createButton('Resume')
+                        settingsResumeB.position(0.4875 * w, 0.325 * h)
+                        settingsResumeB.size(0.1 * w, 0.05 * h)
+
+                        settingsResumeB.mouseClicked(settingsResume)
+
+                        settingsResumeB.style('background-color','rgb(0, 120, 202)')
+                        settingsResumeB.style('border-color','rgb(0, 120, 202)')
+                        settingsResumeB.style('color','white')
+                        settingsResumeB.style('font-weight','bold')
+                        settingsResumeB.style('font-size','20px')
+                        settingsResumeB.style('border-radius','10px')
+
+
+                        function settingsResume() {
+                            // Reset the settings tracker
+                            settingsTracker = 0
+                            
+                            // Remove the resume button & the exit button
+                            settingsResumeB.remove()
+                            settingsExitB.remove()
+
+                            // Continue the loop 
+                            loop()
+                        }
+
+                        // Create the exit button
+                        let settingsExitB = createButton('Go Back to Levels Page (Warning: Progress will not save!)')
+                        settingsExitB.position(0.45 * w, 0.425 * h)
+                        settingsExitB.size(0.181 * w, 0.05 * h)
+1
+                        settingsExitB.mouseClicked(settingsExit)
+
+                        settingsExitB.style('background-color','rgb(0, 120, 202)')
+                        settingsExitB.style('border-color','rgb(0, 120, 202)')
+                        settingsExitB.style('color','white')
+                        settingsExitB.style('font-weight','bold')
+                        settingsExitB.style('font-size','20px')
+                        settingsExitB.style('border-radius','10px')
+
+                        // Send them to the levels page
+                        function settingsExit() {
+                            location.href = 'LevelsPage.html'
+                        }
+                    }
+
+                    else {
+
+                    }
+                }
+            }
+            else {
+
+            }
+
         }
+
     </script>
 </body>
 </html>
