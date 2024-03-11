@@ -17,6 +17,7 @@
         body {
             margin: 0px;
             padding: 0px;
+            background-image: url("Mercury Game Space Background.png");
             overflow: hidden;
         }
 
@@ -70,6 +71,9 @@
 
         // See if they pressed the NPC (Right Side) or not
         var trackRightNPC = 0 
+
+        // See if they pressed the NPC (Left Side) or not
+        var trackLeftNPC = 0 
 
         // ---
         
@@ -295,9 +299,9 @@
                     cX -= 5
                 }
             }
-            // If they do have the control debuff, then move left when they press "d"
+            // If they do have the control debuff, then move left when they press "w"
             else {
-               if (keyIsDown(68)) {
+               if (keyIsDown(87)) {
                 cX -= 5
                } 
             }
@@ -310,9 +314,9 @@
                     cX += 5
                 }
             }
-            // If they do have the control debuff, then move right when they press "a"
+            // If they do have the control debuff, then move right when they press "s"
             else {
-               if (keyIsDown(65)) {
+               if (keyIsDown(83)) {
                 cX += 5
                }
             }
@@ -367,10 +371,9 @@
             rect(p2X,p2Y,p2W,p2H)
         } 
 
-        // Platform #3 
-        // NOTE: Platforms containing the token will be a different color 
+        // Platform #3  
         function platform3() {
-            fill('yellow')
+            fill('rgba(78,33,33,1)')
             rect(p3X,p3Y,p3W,p3H)
         }
 
@@ -420,7 +423,7 @@
 
         // Platform #5.2 (Token #2)
         function platform5_r2() {
-            fill('yellow')
+            fill('rgba(77, 33, 33, 1)')
             rect(p5_r2X,p5_r2Y,p5_r2W,p5_r2H)
         }
 
@@ -464,43 +467,347 @@
                     // Switch their "a" & "d" control
                     if (tokenEffectsArr[randomToken1Effect] == "controlDebuff") {
                         debuffControl = true
+
+                        // Create a text box alerting the user what effect they have received
+                        // Create a DIV
+                        let dCDiv = createDiv()
+                        dCDiv.size(0.5 * w, 0.075 * h)
+                        dCDiv.position(0.25 * w, 0.9 * h)
+                        dCDiv.style('background-color','black')
+                        dCDiv.style('border-radius','10px')
+
+                        // Create a paragraph tag
+                        let dCP = createP('You have just received a debuff. Your controls for moving right and left has been changed to "w" & "s".')
+                        
+                        dCP.style('font-family','Pixelify Sans')
+                        dCP.style('font-size','20px')
+                        dCP.style('color','white')
+                        
+                        // Make the paragraph's parent the div 
+                        dCP.parent(dCDiv)
+
+                        // Create a button to allow them to close the text box
+                        let dCButton = createButton('X')
+                        dCButton.position(0.485 * w,0)
+
+                        dCButton.style('border-color','black')
+                        dCButton.style('border-radius','10px')
+                        dCButton.style('font-family','Pixelify Sans')
+                        dCButton.style('font-size','20px')
+                        dCButton.style('color','red')
+                        dCButton.style('background-color','lightgray')
+
+                        // Add a onclick function to the button to close the text box
+                        dCButton.mouseClicked(closeDCDiv) 
+
+                        function closeDCDiv() {
+                            dCDiv.remove()
+                        }
+
+                        // Make the button's parents the div
+                        dCButton.parent(dCDiv)
                     }
                     // TP the player back to the ground/start
                     else if (tokenEffectsArr[randomToken1Effect] == "tpDebuff") {
                         cX = w/30
                         cY = (0.65 * h)
+
+                        // Create a text box alerting the user what effect they have received
+                        // Create a DIV
+                        let tpDiv = createDiv()
+                        tpDiv.size(0.5 * w, 0.06 * h)
+                        tpDiv.position(0.25 * w, 0.9 * h)
+                        tpDiv.style('background-color','black')
+                        tpDiv.style('border-radius','10px')
+
+                        // Create a paragraph tag
+                        let tpP = createP('You have just received a debuff. You have been TPed to the start of the level.')
+                        
+                        tpP.style('font-family','Pixelify Sans')
+                        tpP.style('font-size','20px')
+                        tpP.style('color','white')
+                        
+                        // Make the paragraph's parent the div 
+                        tpP.parent(tpDiv)
+
+                        // Create a button to allow them to close the text box
+                        let tpButton = createButton('X')
+                        tpButton.position(0.485 * w,0)
+
+                        tpButton.style('border-color','black')
+                        tpButton.style('border-radius','10px')
+                        tpButton.style('font-family','Pixelify Sans')
+                        tpButton.style('font-size','20px')
+                        tpButton.style('color','red')
+                        tpButton.style('background-color','lightgray')
+
+                        // Add a onclick function to the button to close the text box
+                        tpButton.mouseClicked(closeTPDiv) 
+
+                        function closeTPDiv() {
+                            tpDiv.remove()
+                        }
+
+                        // Make the button's parents the div
+                        tpButton.parent(tpDiv)
                     }
                     // Decrease their jump power back to normal 
                     else if (tokenEffectsArr[randomToken1Effect] == "jumpDebuff") {
                         // If their jump power was increased before, then change it back to normal
                         if (lift == -14.5) {
                             lift = -13
-                            window.alert("CHANGED")
+                            
+                            // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let jdDiv = createDiv()
+                            jdDiv.size(0.5 * w, 0.06 * h)
+                            jdDiv.position(0.25 * w, 0.9 * h)
+                            jdDiv.style('background-color','black')
+                            jdDiv.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let jdP = createP('You have just received a debuff. Your jump power has been decreased back to normal jump power.')
+                            
+                            jdP.style('font-family','Pixelify Sans')
+                            jdP.style('font-size','20px')
+                            jdP.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            jdP.parent(jdDiv)
+
+                            // Create a button to allow them to close the text box
+                            let jdButton = createButton('X')
+                            jdButton.position(0.485 * w,0)
+
+                            jdButton.style('border-color','black')
+                            jdButton.style('border-radius','10px')
+                            jdButton.style('font-family','Pixelify Sans')
+                            jdButton.style('font-size','20px')
+                            jdButton.style('color','red')
+                            jdButton.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            jdButton.mouseClicked(closejdDiv) 
+
+                            function closejdDiv() {
+                                jdDiv.remove()
+                            }
+
+                            // Make the button's parents the div
+                            jdButton.parent(jdDiv)
                         }  
                         // If their jump power wasn't increased before, then nothing happens
                         else {
-                            window.alert("NOTHING CHANGED")
+                            // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let jd2Div = createDiv()
+                            jd2Div.size(0.5 * w, 0.06 * h)
+                            jd2Div.position(0.25 * w, 0.9 * h)
+                            jd2Div.style('background-color','black')
+                            jd2Div.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let jd2P = createP('You have just received a debuff, but your jump power is already normal.')
+                            
+                            jd2P.style('font-family','Pixelify Sans')
+                            jd2P.style('font-size','20px')
+                            jd2P.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            jd2P.parent(jd2Div)
+
+                            // Create a button to allow them to close the text box
+                            let jd2Button = createButton('X')
+                            jd2Button.position(0.485 * w,0)
+
+                            jd2Button.style('border-color','black')
+                            jd2Button.style('border-radius','10px')
+                            jd2Button.style('font-family','Pixelify Sans')
+                            jd2Button.style('font-size','20px')
+                            jd2Button.style('color','red')
+                            jd2Button.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            jd2Button.mouseClicked(closejd2Div) 
+
+                            function closejd2Div() {
+                                jd2Div.remove()
+                            }
+
+                            // Make the button's parents the div
+                            jd2Button.parent(jd2Div)
                         }
                     }
                     // Nothing happens
                     else if (tokenEffectsArr[randomToken1Effect] == "nothing") {
-                        window.alert('NOTHING')
+                        // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let nDiv = createDiv()
+                            nDiv.size(0.5 * w, 0.06 * h)
+                            nDiv.position(0.25 * w, 0.9 * h)
+                            nDiv.style('background-color','black')
+                            nDiv.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let nP = createP('You have just received nothing.')
+                            
+                            nP.style('font-family','Pixelify Sans')
+                            nP.style('font-size','20px')
+                            nP.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            nP.parent(nDiv)
+
+                            // Create a button to allow them to close the text box
+                            let nButton = createButton('X')
+                            nButton.position(0.485 * w,0)
+
+                            nButton.style('border-color','black')
+                            nButton.style('border-radius','10px')
+                            nButton.style('font-family','Pixelify Sans')
+                            nButton.style('font-size','20px')
+                            nButton.style('color','red')
+                            nButton.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            nButton.mouseClicked(closeNDiv) 
+
+                            function closeNDiv() {
+                                nDiv.remove()
+                            }
+
+                            // Make the button's parents the div
+                            nButton.parent(nDiv)
                     }
                     // Change their controls back to normal 
                     else if (tokenEffectsArr[randomToken1Effect] == "controlBuff") {
                         // Check if their control was reversed previously 
                         if (debuffControl == true) {
-                            debuffControl == false 
-                            window.alert("CONTROL REVERSED")
+                            // Change the debuff to false
+                            debuffControl == false
+
+                            // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let cBDiv = createDiv()
+                            cBDiv.size(0.5 * w, 0.06 * h)
+                            cBDiv.position(0.25 * w, 0.9 * h)
+                            cBDiv.style('background-color','black')
+                            cBDiv.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let cBP = createP('You have just received a buff. Your reversed controls was changed back to normal.')
+                            
+                            cBP.style('font-family','Pixelify Sans')
+                            cBP.style('font-size','20px')
+                            cBP.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            cBP.parent(cBDiv)
+
+                            // Create a button to allow them to close the text box
+                            let cBButton = createButton('X')
+                            cBButton.position(0.485 * w,0)
+
+                            cBButton.style('border-color','black')
+                            cBButton.style('border-radius','10px')
+                            cBButton.style('font-family','Pixelify Sans')
+                            cBButton.style('font-size','20px')
+                            cBButton.style('color','red')
+                            cBButton.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            cBButton.mouseClicked(closeCBDiv) 
+
+                            function closeCBDiv() {
+                                cBDiv.remove()
+                            }
+
+                            // Make the button's parents the div
+                            cBButton.parent(cBDiv)
                         }
                         // If their controls wasn't reversed before, then nothing happens
                         else {
-                            window.alert("NO CONTROL")
+                            // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let cB2Div = createDiv()
+                            cB2Div.size(0.5 * w, 0.06 * h)
+                            cB2Div.position(0.25 * w, 0.9 * h)
+                            cB2Div.style('background-color','black')
+                            cB2Div.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let cB2P = createP('You have just received a buff, but your controls are already normal.')
+                            
+                            cB2P.style('font-family','Pixelify Sans')
+                            cB2P.style('font-size','20px')
+                            cB2P.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            cB2P.parent(cB2Div)
+
+                            // Create a button to allow them to close the text box
+                            let cB2Button = createButton('X')
+                            cB2Button.position(0.485 * w,0)
+
+                            cB2Button.style('border-color','black')
+                            cB2Button.style('border-radius','10px')
+                            cB2Button.style('font-family','Pixelify Sans')
+                            cB2Button.style('font-size','20px')
+                            cB2Button.style('color','red')
+                            cB2Button.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            cB2Button.mouseClicked(closeCB2Div) 
+
+                            function closeCB2Div() {
+                                cB2Div.remove()
+                            }
+
+                            // Make the button's parents the div
+                            cB2Button.parent(cB2Div)
                         }
                     }
                     // Increase their jump power
                     else if (tokenEffectsArr[randomToken1Effect] == "jumpBuff") {
                         lift = -14.5
+                        // Create a text box alerting the user what effect they have received
+                        // Create a DIV
+                        let jBDiv = createDiv()
+                        jBDiv.size(0.5 * w, 0.06 * h)
+                        jBDiv.position(0.25 * w, 0.9 * h)
+                        jBDiv.style('background-color','black')
+                        jBDiv.style('border-radius','10px')
+
+                        // Create a paragraph tag
+                        let jBP = createP('You have just received a buff. Your jump power has been increased.')
+                        
+                        jBP.style('font-family','Pixelify Sans')
+                        jBP.style('font-size','20px')
+                        jBP.style('color','white')
+                        
+                        // Make the paragraph's parent the div 
+                        jBP.parent(jBDiv)
+
+                        // Create a button to allow them to close the text box
+                        let jBButton = createButton('X')
+                        jBButton.position(0.485 * w,0)
+
+                        jBButton.style('border-color','black')
+                        jBButton.style('border-radius','10px')
+                        jBButton.style('font-family','Pixelify Sans')
+                        jBButton.style('font-size','20px')
+                        jBButton.style('color','red')
+                        jBButton.style('background-color','lightgray')
+
+                        // Add a onclick function to the button to close the text box
+                        jBButton.mouseClicked(closeJBDiv) 
+
+                        function closeJBDiv() {
+                            jBDiv.remove()
+                        }
+
+                        // Make the button's parents the div
+                        jBButton.parent(jBDiv)
                     }
                 }
             }
@@ -532,43 +839,347 @@
                     // Switch their "a" & "d" control
                     if (tokenEffectsArr[randomToken2Effect] == "controlDebuff") {
                         debuffControl = true
+
+                        // Create a text box alerting the user what effect they have received
+                        // Create a DIV
+                        let dCDiv = createDiv()
+                        dCDiv.size(0.5 * w, 0.06 * h)
+                        dCDiv.position(0.25 * w, 0.9 * h)
+                        dCDiv.style('background-color','black')
+                        dCDiv.style('border-radius','10px')
+
+                        // Create a paragraph tag
+                        let dCP = createP('You have just received a debuff. Your controls for moving right and left is reversed now.')
+                        
+                        dCP.style('font-family','Pixelify Sans')
+                        dCP.style('font-size','20px')
+                        dCP.style('color','white')
+                        
+                        // Make the paragraph's parent the div 
+                        dCP.parent(dCDiv)
+
+                        // Create a button to allow them to close the text box
+                        let dCButton = createButton('X')
+                        dCButton.position(0.485 * w,0)
+
+                        dCButton.style('border-color','black')
+                        dCButton.style('border-radius','10px')
+                        dCButton.style('font-family','Pixelify Sans')
+                        dCButton.style('font-size','20px')
+                        dCButton.style('color','red')
+                        dCButton.style('background-color','lightgray')
+
+                        // Add a onclick function to the button to close the text box
+                        dCButton.mouseClicked(closeDCDiv) 
+
+                        function closeDCDiv() {
+                            dCDiv.remove()
+                        }
+
+                        // Make the button's parents the div
+                        dCButton.parent(dCDiv)
                     }
                     // TP the player back to the ground/start
                     else if (tokenEffectsArr[randomToken2Effect] == "tpDebuff") {
                         cX = w/30
                         cY = (0.65 * h)
+
+                        // Create a text box alerting the user what effect they have received
+                        // Create a DIV
+                        let tpDiv = createDiv()
+                        tpDiv.size(0.5 * w, 0.06 * h)
+                        tpDiv.position(0.25 * w, 0.9 * h)
+                        tpDiv.style('background-color','black')
+                        tpDiv.style('border-radius','10px')
+
+                        // Create a paragraph tag
+                        let tpP = createP('You have just received a debuff. You have been TPed to the start of the level.')
+                        
+                        tpP.style('font-family','Pixelify Sans')
+                        tpP.style('font-size','20px')
+                        tpP.style('color','white')
+                        
+                        // Make the paragraph's parent the div 
+                        tpP.parent(tpDiv)
+
+                        // Create a button to allow them to close the text box
+                        let tpButton = createButton('X')
+                        tpButton.position(0.485 * w,0)
+
+                        tpButton.style('border-color','black')
+                        tpButton.style('border-radius','10px')
+                        tpButton.style('font-family','Pixelify Sans')
+                        tpButton.style('font-size','20px')
+                        tpButton.style('color','red')
+                        tpButton.style('background-color','lightgray')
+
+                        // Add a onclick function to the button to close the text box
+                        tpButton.mouseClicked(closeTPDiv) 
+
+                        function closeTPDiv() {
+                            tpDiv.remove()
+                        }
+
+                        // Make the button's parents the div
+                        tpButton.parent(tpDiv)
                     }
                     // Decrease their jump power back to normal 
                     else if (tokenEffectsArr[randomToken2Effect] == "jumpDebuff") {
                         // If their jump power was increased before, then change it back to normal
                         if (lift == -14.5) {
                             lift = -13
-                            window.alert("CHANGED")
+                            
+                            // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let jdDiv = createDiv()
+                            jdDiv.size(0.5 * w, 0.06 * h)
+                            jdDiv.position(0.25 * w, 0.9 * h)
+                            jdDiv.style('background-color','black')
+                            jdDiv.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let jdP = createP('You have just received a debuff. Your jump power has been decreased back to normal jump power.')
+                            
+                            jdP.style('font-family','Pixelify Sans')
+                            jdP.style('font-size','20px')
+                            jdP.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            jdP.parent(jdDiv)
+
+                            // Create a button to allow them to close the text box
+                            let jdButton = createButton('X')
+                            jdButton.position(0.485 * w,0)
+
+                            jdButton.style('border-color','black')
+                            jdButton.style('border-radius','10px')
+                            jdButton.style('font-family','Pixelify Sans')
+                            jdButton.style('font-size','20px')
+                            jdButton.style('color','red')
+                            jdButton.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            jdButton.mouseClicked(closejdDiv) 
+
+                            function closejdDiv() {
+                                jdDiv.remove()
+                            }
+
+                            // Make the button's parents the div
+                            jdButton.parent(jdDiv)
                         }  
                         // If their jump power wasn't increased before, then nothing happens
                         else {
-                            window.alert("NOTHING CHANGED")
+                            // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let jd2Div = createDiv()
+                            jd2Div.size(0.5 * w, 0.06 * h)
+                            jd2Div.position(0.25 * w, 0.9 * h)
+                            jd2Div.style('background-color','black')
+                            jd2Div.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let jd2P = createP('You have just received a debuff, but your jump power is already normal.')
+                            
+                            jd2P.style('font-family','Pixelify Sans')
+                            jd2P.style('font-size','20px')
+                            jd2P.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            jd2P.parent(jd2Div)
+
+                            // Create a button to allow them to close the text box
+                            let jd2Button = createButton('X')
+                            jd2Button.position(0.485 * w,0)
+
+                            jd2Button.style('border-color','black')
+                            jd2Button.style('border-radius','10px')
+                            jd2Button.style('font-family','Pixelify Sans')
+                            jd2Button.style('font-size','20px')
+                            jd2Button.style('color','red')
+                            jd2Button.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            jd2Button.mouseClicked(closejd2Div) 
+
+                            function closejd2Div() {
+                                jd2Div.remove()
+                            }
+
+                            // Make the button's parents the div
+                            jd2Button.parent(jd2Div)
                         }
                     }
                     // Nothing happens
                     else if (tokenEffectsArr[randomToken2Effect] == "nothing") {
-                        window.alert('NOTHING')
+                        // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let nDiv = createDiv()
+                            nDiv.size(0.5 * w, 0.06 * h)
+                            nDiv.position(0.25 * w, 0.9 * h)
+                            nDiv.style('background-color','black')
+                            nDiv.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let nP = createP('You have just received nothing.')
+                            
+                            nP.style('font-family','Pixelify Sans')
+                            nP.style('font-size','20px')
+                            nP.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            nP.parent(nDiv)
+
+                            // Create a button to allow them to close the text box
+                            let nButton = createButton('X')
+                            nButton.position(0.485 * w,0)
+
+                            nButton.style('border-color','black')
+                            nButton.style('border-radius','10px')
+                            nButton.style('font-family','Pixelify Sans')
+                            nButton.style('font-size','20px')
+                            nButton.style('color','red')
+                            nButton.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            nButton.mouseClicked(closeNDiv) 
+
+                            function closeNDiv() {
+                                nDiv.remove()
+                            }
+
+                            // Make the button's parents the div
+                            nButton.parent(nDiv)
                     }
                     // Change their controls back to normal 
                     else if (tokenEffectsArr[randomToken2Effect] == "controlBuff") {
                         // Check if their control was reversed previously 
                         if (debuffControl == true) {
-                            debuffControl == false 
-                            window.alert("CONTROL REVERSED")
+                            // Change the debuff to false
+                            debuffControl == false
+
+                            // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let cBDiv = createDiv()
+                            cBDiv.size(0.5 * w, 0.06 * h)
+                            cBDiv.position(0.25 * w, 0.9 * h)
+                            cBDiv.style('background-color','black')
+                            cBDiv.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let cBP = createP('You have just received a buff. Your reversed controls was changed back to normal.')
+                            
+                            cBP.style('font-family','Pixelify Sans')
+                            cBP.style('font-size','20px')
+                            cBP.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            cBP.parent(cBDiv)
+
+                            // Create a button to allow them to close the text box
+                            let cBButton = createButton('X')
+                            cBButton.position(0.485 * w,0)
+
+                            cBButton.style('border-color','black')
+                            cBButton.style('border-radius','10px')
+                            cBButton.style('font-family','Pixelify Sans')
+                            cBButton.style('font-size','20px')
+                            cBButton.style('color','red')
+                            cBButton.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            cBButton.mouseClicked(closeCBDiv) 
+
+                            function closeCBDiv() {
+                                cBDiv.remove()
+                            }
+
+                            // Make the button's parents the div
+                            cBButton.parent(cBDiv)
                         }
                         // If their controls wasn't reversed before, then nothing happens
                         else {
-                            window.alert("NO CONTROL")
+                            // Create a text box alerting the user what effect they have received
+                            // Create a DIV
+                            let cB2Div = createDiv()
+                            cB2Div.size(0.5 * w, 0.06 * h)
+                            cB2Div.position(0.25 * w, 0.9 * h)
+                            cB2Div.style('background-color','black')
+                            cB2Div.style('border-radius','10px')
+
+                            // Create a paragraph tag
+                            let cB2P = createP('You have just received a buff, but your controls are already normal.')
+                            
+                            cB2P.style('font-family','Pixelify Sans')
+                            cB2P.style('font-size','20px')
+                            cB2P.style('color','white')
+                            
+                            // Make the paragraph's parent the div 
+                            cB2P.parent(cB2Div)
+
+                            // Create a button to allow them to close the text box
+                            let cB2Button = createButton('X')
+                            cB2Button.position(0.485 * w,0)
+
+                            cB2Button.style('border-color','black')
+                            cB2Button.style('border-radius','10px')
+                            cB2Button.style('font-family','Pixelify Sans')
+                            cB2Button.style('font-size','20px')
+                            cB2Button.style('color','red')
+                            cB2Button.style('background-color','lightgray')
+
+                            // Add a onclick function to the button to close the text box
+                            cB2Button.mouseClicked(closeCB2Div) 
+
+                            function closeCB2Div() {
+                                cB2Div.remove()
+                            }
+
+                            // Make the button's parents the div
+                            cB2Button.parent(cB2Div)
                         }
                     }
                     // Increase their jump power
                     else if (tokenEffectsArr[randomToken2Effect] == "jumpBuff") {
                         lift = -14.5
+                        // Create a text box alerting the user what effect they have received
+                        // Create a DIV
+                        let jBDiv = createDiv()
+                        jBDiv.size(0.5 * w, 0.06 * h)
+                        jBDiv.position(0.25 * w, 0.9 * h)
+                        jBDiv.style('background-color','black')
+                        jBDiv.style('border-radius','10px')
+
+                        // Create a paragraph tag
+                        let jBP = createP('You have just received a buff. Your jump power has been increased.')
+                        
+                        jBP.style('font-family','Pixelify Sans')
+                        jBP.style('font-size','20px')
+                        jBP.style('color','white')
+                        
+                        // Make the paragraph's parent the div 
+                        jBP.parent(jBDiv)
+
+                        // Create a button to allow them to close the text box
+                        let jBButton = createButton('X')
+                        jBButton.position(0.485 * w,0)
+
+                        jBButton.style('border-color','black')
+                        jBButton.style('border-radius','10px')
+                        jBButton.style('font-family','Pixelify Sans')
+                        jBButton.style('font-size','20px')
+                        jBButton.style('color','red')
+                        jBButton.style('background-color','lightgray')
+
+                        // Add a onclick function to the button to close the text box
+                        jBButton.mouseClicked(closeJBDiv) 
+
+                        function closeJBDiv() {
+                            jBDiv.remove()
+                        }
+
+                        // Make the button's parents the div
+                        jBButton.parent(jBDiv)
                     }
                 }
             }
@@ -578,7 +1189,7 @@
                 noStroke()
                 circle(t2X,t2Y,t2D)
             }
-        }
+        }   
 
         function draw() {
             clear() 
@@ -599,7 +1210,7 @@
             }
 
             // If the player does have the debuff control AND they're walking left then make the astronaut face to the left. 
-            else if (keyIsDown(68) && debuffControl == true) {
+            else if (keyIsDown(87) && debuffControl == true) {
                 image(leftAstronautPlayer,cX,cY,cW,cH)
             }
             
@@ -744,9 +1355,85 @@
             // Create dialogue if their mouse is on the NPC and they pressed it 
             // if ((mouse position is on NPC) AND (character is on the platform the NPC is on))
             if ( ( ((lmX <= mouseX) && (lmX + lmW >= mouseX)) && ((lmY <= mouseY) && (lmY + lmH >= mouseY)) && mouseIsPressed === true ) && ( (p4_l4X <= cX + cW) && (cX - cW <= p4_l4X + p4_l4W - cW) && (cY + cH >= p4_l4Y) && (cY + cH <= p4_l4Y + p4_l4H) && jump == false )) {
+                noLoop()
+
                 // Reset mouseIsPressed to false, because if it's kept true then the if statement will run even if their mouse is hovering the NPC (AFTER THEY PRESSED IT ONCE)
                 mouseIsPressed = false
-                location.href = "LevelsPage.html"
+
+                // Add 1 to the tracker so they can't click it multiple times
+                trackLeftNPC += 1
+
+                // Create DIV for dialogue box
+                let cDDiv = createDiv()
+                
+                // Location of DIV
+                cDDiv.position(0.25 * w, 0.25 * h)
+
+                // DIV size
+                cDDiv.size(0.5 * w, 0.5 * h)
+
+                // Style the DIV
+                cDDiv.style('background-color','black')
+                cDDiv.style('border-radius','10px')
+                
+                // Create the dialogue text
+                let cDText = createP('Hey there astronaut! You have found the correct NPC. Do you want me to send you back so you can compelete the next level? (Press Yes to continue or No to stay)')
+
+                // Style the text
+                cDText.style('font-family','Pixelify Sans')
+                cDText.style('color','white')
+                cDText.style('font-size','24px')
+                cDText.id('cDText')
+
+                // Make the DIV the parent of the text (p)
+                cDText.parent(cDDiv)
+                
+                // Create a button to close the dialogue 
+                let tPYButton = createButton('Yes')
+
+                // Make the button run a function when they click it
+                tPYButton.mouseClicked(transferPage)
+                tPYButton.size(0.0275 * w, 0.035 * h)
+                tPYButton.position(0.445 * w, 0.467 * h)
+
+                tPYButton.style('background-color','lightgreen') 
+                tPYButton.style('color','darkgreen') 
+                tPYButton.style('font-size','24px')
+                tPYButton.style('font-family','Pixelify Sans')
+                tPYButton.style('border-radius','10px')
+
+                tPYButton.parent(cDDiv)
+
+                // Function to transfer to the levels page
+                function transferPage() {
+                    // Set a variable to true to show that the player has completed the level
+                    localStorage.setItem('l1Completion','true')
+                    // Send them back to the levels page
+                    location.href = "LevelsPage.html"
+                }
+
+                // Create a button to close the dialogue 
+                let tPNButton = createButton('No')
+
+                // Make the button run a function when they click it
+                tPNButton.mouseClicked(cTPage)
+                tPNButton.size(0.0275 * w, 0.035 * h)
+                tPNButton.position(0.4725 * w, 0.467 * h)
+
+                tPNButton.style('background-color','red') 
+                tPNButton.style('color','darkred') 
+                tPNButton.style('font-size','24px')
+                tPNButton.style('font-family','Pixelify Sans')
+                tPNButton.style('border-radius','10px')
+
+                tPNButton.parent(cDDiv)
+
+                // Function to close the dialogoue 
+                function cTPage() {
+                    cDDiv.remove()
+                    trackLeftNPC = 0
+                    loop()
+                }
             }
 
             // Platform 5 (Right side) will lead to the decoy NPC
@@ -941,7 +1628,7 @@
                         loop()
                     }
                 }
-            } // Close the if statement for pressing the NPC w
+            } // Close the if statement for pressing the NPC 
             
             // Create a settings menu for them to leave to the main menu 
             // Only create the button if the tracker is equal to 0 so it only creates it ONE time and not infinitely  
@@ -1003,7 +1690,7 @@
                         let settingsExitB = createButton('Go Back to Levels Page (Warning: Progress will not save!)')
                         settingsExitB.position(0.45 * w, 0.425 * h)
                         settingsExitB.size(0.181 * w, 0.05 * h)
-1
+
                         settingsExitB.mouseClicked(settingsExit)
 
                         settingsExitB.style('background-color','rgb(0, 120, 202)')
@@ -1022,11 +1709,12 @@
                     else {
 
                     }
-                }
-            }
+                } // Close the if statement for the settings menu
+            } 
+
             else {
 
-            }
+            }   // Else statement for settings
 
         }
 
