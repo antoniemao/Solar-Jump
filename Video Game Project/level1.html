@@ -684,7 +684,7 @@
                         // Check if their control was reversed previously 
                         if (debuffControl == true) {
                             // Change the debuff to false
-                            debuffControl == false
+                            debuffControl = false
 
                             // Create a text box alerting the user what effect they have received
                             // Create a DIV
@@ -843,13 +843,13 @@
                         // Create a text box alerting the user what effect they have received
                         // Create a DIV
                         let dCDiv = createDiv()
-                        dCDiv.size(0.5 * w, 0.06 * h)
+                        dCDiv.size(0.5 * w, 0.075 * h)
                         dCDiv.position(0.25 * w, 0.9 * h)
                         dCDiv.style('background-color','black')
                         dCDiv.style('border-radius','10px')
 
                         // Create a paragraph tag
-                        let dCP = createP('You have just received a debuff. Your controls for moving right and left is reversed now.')
+                        let dCP = createP('You have just received a debuff. Your controls for moving right and left has been changed to "w" & "s".')
                         
                         dCP.style('font-family','Pixelify Sans')
                         dCP.style('font-size','20px')
@@ -1056,7 +1056,7 @@
                         // Check if their control was reversed previously 
                         if (debuffControl == true) {
                             // Change the debuff to false
-                            debuffControl == false
+                            debuffControl = false
 
                             // Create a text box alerting the user what effect they have received
                             // Create a DIV
