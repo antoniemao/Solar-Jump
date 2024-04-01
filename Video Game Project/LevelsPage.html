@@ -198,6 +198,55 @@
             margin-left: 22.5%;
             z-index: 2;
         }
+
+        /* Mars */
+        /* Level 4 Div CSS */
+        #level4Div {
+            position: absolute;
+            width: 12.5%;
+            height: 25%;
+            margin-left: 50%;
+            margin-top: 5%;
+            flex-direction: column;
+        }
+
+        /* Level 4 Button CSS */
+        #level4Button {
+            background-color: rgb(0, 120, 202);
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 30px;
+            border-radius: 7.5px;
+            border-color: rgb(0, 67, 202);
+            margin-left: 42.5%;
+            margin-top: 5%;
+        }   
+
+        /* Level 4 Planet CSS */
+        #level4PlanetDiv {
+            flex-direction: column;
+            width: 75%;
+            height: 75%;
+            margin-top: 5%;
+            margin-left: 25%;
+        }
+
+        #level4PlanetIMG {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            margin-top: 15%;
+            z-index: 1;
+        }
+
+        #level4AstronautIMG {
+            position: absolute;
+            width: 25%;
+            height: 25%;
+            margin-top: 5%;
+            margin-left: 22.5%;
+            z-index: 2;
+        }
+
     </style>
 
 
@@ -234,8 +283,15 @@
             </div>
         </div> 
 
-        <!-- Go to level 4 when you press the icon/button -->
-        <!-- <button onclick="level4Button()" id="level1Button">4</button> -->
+        <div id="level4Div">
+            <!-- Go to level 4 when you press the icon/button -->
+            <button onclick="level4Button()" id="level4Button">4</button>
+            <!-- Level 4 Planet: Earth -->
+            <div id="level4PlanetDiv">
+                <img src="Left Mars Astronaut (NPC).png" id="level4AstronautIMG">
+                <img src="Mars.png" id="level4PlanetIMG">
+            </div>
+        </div> 
 
         <!-- Go to level 5 when you press the icon/button -->
         <!-- <button onclick="level5Button()" id="level5Button">5</button> -->
@@ -270,6 +326,11 @@
         var l2NCTracker = 0 
         // Var for tracking completed level 3 text box
         var l3CTracker = 0 
+        // Var for tracking not completed level 3 text box
+        var l3NCTracker = 0 
+        // Var for tracking completed level 4 text box
+        var l4CTracker = 0 
+
 
 
 
@@ -277,7 +338,7 @@
         h = window.innerHeight
 
         
-    
+        // Level 1 Button Function
         function level1Button() {
             // Get the value of the completion of level 1 to see if it's completed or not
             let getl1Complete = localStorage.getItem('l1Completion')
@@ -375,6 +436,11 @@
             }
         }
 
+
+        // ---
+
+
+        // Level 2 Button Function
         function level2Button() {
             // Get the value of the completion of level 1 to see if it's completed or not
             let getl1Complete = localStorage.getItem('l1Completion')
@@ -549,6 +615,11 @@
             }   //Close else 
         }   //Close function
 
+
+        // ---
+
+
+        // Level 3 Button Function
         function level3Button() {
             // Get the value of the completion of level 1 to see if it's completed or not
             let getl2Complete = localStorage.getItem('l2Completion')
@@ -556,7 +627,7 @@
             if (getl2Complete == 'true') {
                 // Get the value of the completion of level 3 to see if it's completed or not
                 let getl3Complete = localStorage.getItem('l3Completion')
-                // If they didn't enter level 2/complete it then send them to level 2
+                // If they didn't enter level 3/complete it then send them to level 3
                 if (getl3Complete === null) {
                     location.href = "level3.html"
                 }
@@ -572,7 +643,7 @@
                         let l3CDiv = document.createElement('div')
 
                         // Set the id of the div
-                        l3CDiv.setAttribute('id','l2CDiv')
+                        l3CDiv.setAttribute('id','l3CDiv')
 
                         // Create paragraph tag
                         let l3CP = document.createElement('p')
@@ -635,7 +706,7 @@
 
                             // Make the level tracker reset so they can press the level button again 
                             l3CTracker = 0
-                        }   //Closes function l2C() 
+                        }   //Closes function l3C() 
                         }   //Closes if (l3CTracker == 0)
                     }   //Closes if (getl3Complete == 'true')
                 }   //Closes else
@@ -722,7 +793,185 @@
                 }   //Close else
             }   //Close else 
         }   //Close function
-        
+
+
+        // ---
+
+
+        // Level 4 Button Function 
+        function level4Button() {
+            // Get the value of the completion of level 3 to see if it's completed or not
+            let getl3Complete = localStorage.getItem('l3Completion')
+            // If they completed level 3, allow them to go to level 4
+            if (getl3Complete == 'true') {
+                // Get the value of the completion of level 4 to see if it's completed or not
+                let getl4Complete = localStorage.getItem('l4Completion')
+                // If they didn't enter level 4/complete it then send them to level 4
+                if (getl4Complete === null) {
+                    location.href = "level4.html"
+                }
+
+                else {
+                    // If they completed level 4 AND they didn't already open get this message , then tell them they already finished the level and can't go to it 
+                    if (getl4Complete == 'true') {
+                        if (l4CTracker == 0) {
+                        // Add 1 to the tracker so they can't create multiple divs
+                        l4CTracker += 1
+
+                        // Create the div 
+                        let l4CDiv = document.createElement('div')
+
+                        // Set the id of the div
+                        l4CDiv.setAttribute('id','l4CDiv')
+
+                        // Create paragraph tag
+                        let l4CP = document.createElement('p')
+
+                        // Create text node
+                        let l4CPT = document.createTextNode("You already completed Level 4 and cannot go back. (NOTE: If you need to, then press the 'Reset All Levels' button.)")
+
+                        // Append the text node to the p tag 
+                        l4CP.appendChild(l4CPT)
+
+                        // Set the id of the p tag
+                        l4CP.setAttribute('id','l4CP')
+
+                        // Append the p tag to the div
+                        l4CDiv.appendChild(l4CP)
+
+                        // Create a button for them to close the text box
+                        let l4CB = document.createElement('button')
+                        let l4CBT = document.createTextNode('X')
+
+                        // Append the text to the button
+                        l4CB.appendChild(l4CBT)
+
+                        // Set the id of the button
+                        l4CB.setAttribute('id','l4CB')
+
+                        // Append the button to the div
+                        l4CDiv.appendChild(l4CB)
+
+                        // Append the div to the body
+                        document.body.appendChild(l4CDiv)
+
+                        // Style the div
+                        document.getElementById('l4CDiv').style.position = "absolute"
+                        document.getElementById('l4CDiv').style.backgroundColor = "red"
+                        document.getElementById('l4CDiv').style.borderRadius = "15px"
+                        document.getElementById('l4CDiv').style.borderColor = "red"
+                        document.getElementById('l4CDiv').style.marginTop = "-15%"
+                        document.getElementById('l4CDiv').style.marginLeft = "15%"
+
+                        // Style the paragraph tag
+                        document.getElementById('l4CP').style.color = "white"
+                        document.getElementById('l4CP').style.fontFamily = "Pixelify Sans"
+                        document.getElementById('l4CP').style.fontSize = "24px"
+
+                        // Style the yes button 
+                        document.getElementById('l4CB').style.backgroundColor = "darkred"
+                        document.getElementById('l4CB').style.borderRadius = "15px"
+                        document.getElementById('l4CB').style.borderColor = "black"
+                        document.getElementById('l4CB').style.fontFamily = "Pixelify Sans"
+                        document.getElementById('l4CB').style.color = "white"
+                        document.getElementById('l4CB').style.fontSize = "20px"
+
+                        // Set the onclick of the close button to a function that removes the text box
+                        document.getElementById('l4CB').onclick = 
+                        function l4C() {
+                            let removel4CDiv = document.getElementById('l4CDiv')
+                            let containerl4C = removel4CDiv.parentNode
+                            containerl4C.removeChild(removel4CDiv)
+
+                            // Make the level tracker reset so they can press the level button again 
+                            l4CTracker = 0
+                        }   //Closes function l4C() 
+                        }   //Closes if (l4CTracker == 0)
+                    }   //Closes if (getl4Complete == 'true')
+                }   //Closes else
+            }   //Closes if (getl3Complete == 'true')
+
+            // If they didn't finish level 3, then tell them they have to finish level 3 first in order to move on to the next level
+            else {
+                if (l3NCTracker == 0) {
+                    // Add 1 to the tracker so they can't create multiple divs
+                    l3NCTracker += 1
+
+                    // Create the div 
+                    let l4NCDiv = document.createElement('div')
+
+                    // Set the id of the div
+                    l4NCDiv.setAttribute('id','l4NCDiv')
+
+                    // Create paragraph tag
+                    let l4NCP = document.createElement('p')
+
+                    // Create text node
+                    let l4NCPT = document.createTextNode("You did not complete Level 3 yet. Complete Level 3 to go to Level 4.")
+
+                    // Append the text node to the p tag 
+                    l4NCP.appendChild(l4NCPT)
+
+                    // Set the id of the p tag
+                    l4NCP.setAttribute('id','l4NCP')
+
+                    // Append the p tag to the div
+                    l4NCDiv.appendChild(l4NCP)
+
+                    // Create a button for them to close the text box
+                    let l4NCB = document.createElement('button')
+                    let l4NCBT = document.createTextNode('X')
+
+                    // Append the text to the button
+                    l4NCB.appendChild(l4NCBT)
+
+                    // Set the id of the button
+                    l4NCB.setAttribute('id','l4NCB')
+
+                    // Append the button to the div
+                    l4NCDiv.appendChild(l4NCB)
+
+                    // Append the div to the body
+                    document.body.appendChild(l4NCDiv)
+
+                    // Style the div
+                    document.getElementById('l4NCDiv').style.position = "absolute"
+                    document.getElementById('l4NCDiv').style.backgroundColor = "red"
+                    document.getElementById('l4NCDiv').style.borderRadius = "15px"
+                    document.getElementById('l4NCDiv').style.borderColor = "red"
+                    document.getElementById('l4NCDiv').style.marginTop = "-15%"
+                    document.getElementById('l4NCDiv').style.marginLeft = "32.5%"
+
+                    // Style the paragraph tag
+                    document.getElementById('l4NCP').style.color = "white"
+                    document.getElementById('l4NCP').style.fontFamily = "Pixelify Sans"
+                    document.getElementById('l4NCP').style.fontSize = "24px"
+
+                    // Style the yes button 
+                    document.getElementById('l4NCB').style.backgroundColor = "darkred"
+                    document.getElementById('l4NCB').style.borderRadius = "15px"
+                    document.getElementById('l4NCB').style.borderColor = "black"
+                    document.getElementById('l4NCB').style.fontFamily = "Pixelify Sans"
+                    document.getElementById('l4NCB').style.color = "white"
+                    document.getElementById('l4NCB').style.fontSize = "20px"
+
+                    // Set the onclick of the close button to a function that removes the text box
+                    document.getElementById('l4NCB').onclick = 
+                    function l4NC() {
+                        let removel4NCDiv = document.getElementById('l4NCDiv')
+                        let containerl4NC = removel4NCDiv.parentNode
+                        containerl4NC.removeChild(removel4NCDiv)
+
+                        // Make the level tracker reset so they can press the level button again 
+                        l3NCTracker = 0
+                    }   //Close function
+                }   //Close if (l3NCTracker == 0)
+
+                else {
+                    
+                }   //Close else
+            }   //Close else 
+        }   //Close function
 
         function levelsToMain() {
             location.href = "MainMenu.html"
