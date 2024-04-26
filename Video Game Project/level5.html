@@ -35,6 +35,12 @@
         // ---
 
 
+        // Jumping sound var
+        let jumpSound
+
+        // Jumping sound tracker 
+        let jumpSoundT = 0
+
         // Character's values
         let astronautPlayer
 
@@ -286,6 +292,23 @@
 
         // ---
 
+        // Preload images
+        function preload() {
+            // Astronaut Player
+            rightAstronautPlayer = loadImage('Player Astronaut.png')
+            leftAstronautPlayer = loadImage('Walking Left Player Astronaut.png')
+
+            // Jupiter Astronaut NPC
+            // (Left Side)
+            leftJupiterNPC = loadImage('Left Jupiter Astronaut (NPC).png')
+
+            // (Right Side)
+            rightJupiterNPC = loadImage('Right Jupiter Astronaut (NPC).png')
+
+            // Jumping sound
+            jumpSound = loadSound('JumpSound.mp3')
+        }
+
 
         function gravity() {
             // Stop the character from falling down when it's at the ground and if they're not jumping
@@ -334,9 +357,21 @@
             if (keyIsDown(32)) {
                 // If they press spacebar then change the jump value from false to true
                 jump = true
+
+                // If the tracker of the jumping sound is 0, then play the sound.
+                if (jumpSoundT == 0) {
+                    // Play the jumping sound 
+                    // soundVar.play([Starting time],[Playback speed], [Volume], [Cue to start], [Duration])
+                    jumpSound.play(0, 1, 1, 0, 1)
+
+                    // Add 1 to the jump sound tracker
+                    jumpSoundT += 1
+                }
             }
             // Set jump to false if they're not jumping 
             else {
+                // Set the jump sound tracker back to 0 so the sound can play again when they jump 
+                jumpSoundT = 0
                 jump = false
             }
         }
@@ -351,8 +386,8 @@
             // If they do have the control debuff, then move left when they press "w"
             else {
                if (keyIsDown(87)) {
-                cX -= 5
-               } 
+                    cX -= 5
+                } 
             }
         }
 
@@ -365,33 +400,15 @@
             }
             // If they do have the control debuff, then move right when they press "s"
             else {
-               if (keyIsDown(83)) {
-                cX += 5
-               }
+                if (keyIsDown(83)) {
+                    cX += 5
+                }
             }
         }
         
 
         function setup() {
             createCanvas(w,h)
-        }
-
-
-        // ---
-
-
-        // Preload images
-        function preload() {
-            // Astronaut Player
-            rightAstronautPlayer = loadImage('Player Astronaut.png')
-            leftAstronautPlayer = loadImage('Walking Left Player Astronaut.png')
-
-            // Jupiter Astronaut NPC
-            // (Left Side)
-            leftJupiterNPC = loadImage('Left Jupiter Astronaut (NPC).png')
-
-            // (Right Side)
-            rightJupiterNPC = loadImage('Right Jupiter Astronaut (NPC).png')
         }
         
 
