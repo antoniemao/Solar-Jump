@@ -35,11 +35,22 @@
         // ---
 
 
+        // Sounds
+        // BG Music
+        let bgMusic
+
+        // Collecting token sound
+        let tokenCollect
+
         // Jumping Sound var
         let jumpSound
 
         // Tracker for how much times they pressed spacebar (For sound)
         let jumpSoundT = 0
+
+
+        // ---
+
 
         // Character's values
         let astronautPlayer
@@ -258,6 +269,13 @@
             // (Right Side)
             rightMercuryNPC = loadImage('Right Mercury Astronaut (NPC).png')
             
+            // Sounds
+            // BG Sound
+            bgMusic = loadSound('Level1Music.mp3')
+
+            // Token Collect sound
+            tokenCollect = loadSound('token.mp3')
+
             // Jumping Sound
             jumpSound = loadSound('JumpSound.mp3')
         }
@@ -318,7 +336,7 @@
                 if (jumpSoundT == 0) {
                     // Play the jumping sound 
                     // soundVar.play([Starting time],[Playback speed], [Volume], [Cue to start], [Duration])
-                    jumpSound.play(0, 1, 1, 0, 1)
+                    jumpSound.play(0, 1, 0.4, 0, 1)
 
                     // Add 1 to the jump sound tracker
                     jumpSoundT += 1
@@ -365,7 +383,16 @@
         
 
         function setup() {
-            createCanvas(w,h)
+            createCanvas(w,h)  
+
+            // Play the background music 
+            bgMusic.play()
+
+            // Loop the music
+            bgMusic.loop()
+
+            // Set the volume
+            bgMusic.setVolume(0.55)
         }
         
 
@@ -483,6 +510,11 @@
                 if (hitToken1Tracker == 1) {
                     // NOTE: Alert the user what effect they received when they collide with the token 
 
+                    // Play the token collect sound
+                    tokenCollect.play()
+
+                    // Set the volume of the sound
+                    tokenCollect.setVolume(0.25)
 
                     // Generate a random number to see which random effect they will receive
                     let randomToken1Effect = (Math.floor(Math.random() * (tokenEffectsArr.length)))
@@ -855,6 +887,11 @@
                 if (hitToken2Tracker == 1) {
                     // NOTE: Alert the user what effect they received when they collide with the token 
 
+                    // Play the token collect sound
+                    tokenCollect.play()
+
+                    // Set the volume of the sound
+                    tokenCollect.setVolume(0.25)
 
                     // Generate a random number to see which random effect they will receive
                     let randomToken2Effect = (Math.floor(Math.random() * (tokenEffectsArr.length)))

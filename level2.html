@@ -35,11 +35,22 @@
         // ---
 
 
-        // Jumping sound var
+        // Sounds
+        // BG Music
+        let bgMusic
+
+        // Collecting token sound
+        let tokenCollect
+
+        // Jumping Sound var
         let jumpSound
 
-        // Jumping sound tracker
+        // Tracker for how much times they pressed spacebar (For sound)
         let jumpSoundT = 0
+
+
+        // ---
+
 
         // Character's values
         let astronautPlayer
@@ -129,7 +140,7 @@
         // Velocity/Player Speed
         var velocity = 5
         // How high you want to jump
-        var lift = -12
+        var lift = -12.25
         // Falling speed
         var fallSpeed = 5
 
@@ -327,6 +338,13 @@
             // (Left of Right Side)
             rightVenusLNPC = loadImage('Left Venus Astronaut (NPC).png')
 
+            // Sounds
+            // BG Sound
+            bgMusic = loadSound('Level2Music.mp3')
+
+            // Token Collect sound
+            tokenCollect = loadSound('token.mp3')
+
             // Jumping Sound
             jumpSound = loadSound('JumpSound.mp3')
         }
@@ -431,6 +449,15 @@
 
         function setup() {
             createCanvas(w,h)
+
+            // Play the background music 
+            bgMusic.play()
+
+            // Loop the music
+            bgMusic.loop()
+
+            // Set the volume
+            bgMusic.setVolume(0.55)
         }
         
 
@@ -574,6 +601,11 @@
                 if (hitToken1Tracker == 1) {
                     // NOTE: Alert the user what effect they received when they collide with the token 
 
+                    // Play the token collect sound
+                    tokenCollect.play()
+
+                    // Set the volume of the sound
+                    tokenCollect.setVolume(0.25)
 
                     // Generate a random number to see which random effect they will receive
                     let randomToken1Effect = (Math.floor(Math.random() * (tokenEffectsArr.length)))
@@ -668,7 +700,7 @@
                     else if (tokenEffectsArr[randomToken1Effect] == "jumpDebuff") {
                         // If their jump power was increased before, then change it back to normal
                         if (lift == -13.5) {
-                            lift = -12
+                            lift = -12.25
                             
                             // Create a text box alerting the user what effect they have received
                             // Create a DIV
@@ -946,6 +978,11 @@
                 if (hitToken2Tracker == 1) {
                     // NOTE: Alert the user what effect they received when they collide with the token 
 
+                    // Play the token collect sound
+                    tokenCollect.play()
+
+                    // Set the volume of the sound
+                    tokenCollect.setVolume(0.25)
 
                     // Generate a random number to see which random effect they will receive
                     let randomToken2Effect = (Math.floor(Math.random() * (tokenEffectsArr.length)))
@@ -1040,7 +1077,7 @@
                     else if (tokenEffectsArr[randomToken2Effect] == "jumpDebuff") {
                         // If their jump power was increased before, then change it back to normal
                         if (lift == -13.5) {
-                            lift = -12
+                            lift = -12.25
                             
                             // Create a text box alerting the user what effect they have received
                             // Create a DIV
