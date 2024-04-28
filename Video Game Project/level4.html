@@ -35,6 +35,13 @@
         // ---
 
 
+        // Sounds
+        // BG Music
+        let bgMusic
+
+        // Collecting token sound
+        let tokenCollect
+
         // Jumping sound var
         let jumpSound
 
@@ -244,6 +251,13 @@
             // (Left Side)
             rightMarsNPC = loadImage('Right Mars Astronaut (NPC).png')
 
+            // Sounds
+            // BG Sound
+            bgMusic = loadSound('Level4Music.mp3')
+
+            // Token Collect sound
+            tokenCollect = loadSound('token.mp3')
+
             // Jumping sound
             jumpSound = loadSound('JumpSound.mp3')
         }
@@ -348,6 +362,15 @@
 
         function setup() {
             createCanvas(w,h)
+
+            // Play the background music 
+            bgMusic.play()
+
+            // Loop the music
+            bgMusic.loop()
+
+            // Set the volume
+            bgMusic.setVolume(0.55)
         }
         
 
@@ -468,6 +491,11 @@
                 if (hitToken1Tracker == 1) {
                     // NOTE: Alert the user what effect they received when they collide with the token 
 
+                    // Play the token collect sound
+                    tokenCollect.play()
+
+                    // Set the volume of the sound
+                    tokenCollect.setVolume(0.25)
 
                     // Generate a random number to see which random effect they will receive
                     let randomToken1Effect = (Math.floor(Math.random() * (tokenEffectsArr.length)))
@@ -840,6 +868,11 @@
                 if (hitToken2Tracker == 1) {
                     // NOTE: Alert the user what effect they received when they collide with the token 
 
+                    // Play the token collect sound
+                    tokenCollect.play()
+
+                    // Set the volume of the sound
+                    tokenCollect.setVolume(0.25)
 
                     // Generate a random number to see which random effect they will receive
                     let randomToken2Effect = (Math.floor(Math.random() * (tokenEffectsArr.length)))

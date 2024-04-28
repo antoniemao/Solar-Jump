@@ -215,7 +215,27 @@
     <button onclick="helpToMain()" id="helpToMainButton">Go Back to the Main Page</button>
     
     <script> 
-        // Start the game when they click the "Start Game" button
+        // Background Music var
+        let bgMusic 
+
+        // Preload sounds
+        function preload() {
+            bgMusic = loadSound('SpaceBackgroundMusic.mp3')
+        }
+
+        function setup() {
+            // Play the background music 
+            bgMusic.play()
+
+            // Loop the music
+            bgMusic.loop()
+
+            // Set the volume
+            bgMusic.setVolume(0.55)
+        }
+
+
+        // Go back to the Main page 
         function helpToMain() {
             location.href = "index.html"
         }

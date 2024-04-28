@@ -566,26 +566,26 @@
         // Var for tracking completed level 8 text box
         var l8CTracker = 0 
 
-        // Background sound variable
-        let bgMusic
+        // Background Music var
+        let bgMusic 
 
         w = window.innerWidth
         h = window.innerHeight
 
-        // Preload the music
+        // Preload sounds
         function preload() {
             bgMusic = loadSound('SpaceBackgroundMusic.mp3')
         }
 
-        function draw() {
+        function setup() {
             // Play the background music 
             bgMusic.play()
 
-            // Set the volume of the music
-            bgMusic.outputVolume(0.2)
-
             // Loop the music
             bgMusic.loop()
+
+            // Set the volume
+            bgMusic.setVolume(0.55)
         }
 
 
@@ -2006,7 +2006,7 @@
                 document.getElementById('rlDiv').style.backgroundColor = "red"
                 document.getElementById('rlDiv').style.borderRadius = "15px"
                 document.getElementById('rlDiv').style.borderColor = "red"
-                document.getElementById('rlDiv').style.marginTop = "-15%"
+                document.getElementById('rlDiv').style.marginTop = "-17.5%"
                 document.getElementById('rlDiv').style.marginLeft = "5%"
 
                 // Style the paragraph tag

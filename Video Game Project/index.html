@@ -22,6 +22,22 @@
             background-image: url("Game Space Background.png");
         }   
 
+        /* Recommend Text CSS*/
+        #recommendDiv {
+            background-color: rgba(0,0,0,0); 
+            border-color: rgba(0,0,0,0);
+            position: absolute;
+            margin-left: 5%;
+            margin-bottom: 5%;
+            width: 17.5%;
+            height: 25%;
+        }
+
+        #recommend {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 25px;
+            color: rgb(230, 119, 0);
+        }
 
         /* Start Button CSS */
 
@@ -229,6 +245,10 @@
 
 </head>
 <body> 
+    <div id="recommendDiv">
+        <h1 id="recommend">Highly recommend: Turn on FullScreen (Press F11 Key) and Zoom for screen to 80-100%</h1>
+    </div>
+
     <div id="titleDiv">
         <h1 id="titleHeading">Solar Jump</h1>
     </div>
@@ -299,6 +319,17 @@
         // Preload sounds
         function preload() {
             bgMusic = loadSound('SpaceBackgroundMusic.mp3')
+        }
+
+        function setup() {
+            // Play the background music 
+            bgMusic.play()
+
+            // Loop the music
+            bgMusic.loop()
+
+            // Set the volume
+            bgMusic.setVolume(0.55)
         }
 
         // Variable to track how much times they click the NPC
@@ -380,7 +411,7 @@
                 // Apply CSS to the DIV 
                 document.getElementById('aDD').style.backgroundColor = "gray"
                 document.getElementById('aDD').style.marginLeft = "2.5%"
-                document.getElementById('aDD').style.marginTop = "21%"
+                document.getElementById('aDD').style.marginTop = "17.75%"
                 document.getElementById('aDD').style.width = "35%"
                 document.getElementById('aDD').style.height = "20%"
                 document.getElementById('aDD').style.borderRadius = "10px"
@@ -423,20 +454,6 @@
             else {
 
             }
-        }
-
-
-
-        function draw() {
-            // Play the background music 
-            // soundVar.play([Starting time],[Playback speed], [Volume], [Cue to start], [Duration])
-            bgMusic.play()
-
-
-            bgMusic.setVolume(0.5)
-
-            // Loop the music
-            bgMusic.loop()
         }
     </script>
 </body>

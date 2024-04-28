@@ -34,6 +34,10 @@
         // ---
 
 
+        // Sounds
+        // BG Music
+        let bgMusic
+
         // Jumping sound var
         let jumpSound
 
@@ -165,7 +169,7 @@
         // Velocity/Player Speed
         var velocity = 5
         // How high you want to jump
-        var lift = -11.75
+        var lift = -12.5
         // Falling speed
         var fallSpeed = 5
 
@@ -264,6 +268,10 @@
             // Last NPC
             NeptuneNPC = loadImage('Right Neptune Astronaut (NPC).png')
 
+            // Sounds
+            // BG Sound
+            bgMusic = loadSound('Level8Music.mp3')
+
             // Jumping sound
             jumpSound = loadSound('JumpSound.mp3')
         }
@@ -352,6 +360,15 @@
 
         function setup() {
             createCanvas(w,h)
+
+            // Play the background music 
+            bgMusic.play()
+
+            // Loop the music
+            bgMusic.loop()
+
+            // Set the volume
+            bgMusic.setVolume(0.55)
         }
         
 
