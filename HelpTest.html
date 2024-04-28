@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="https://unpkg.com/p5.collide2d"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+
+
+    <!-- CSS -->
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            background-image: url("Game Space Background.png");
+        }
+
+        /* Go Back Button CSS */
+
+        #helpToMainButton {
+            background-color: rgb(0, 120, 202);
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 35px;
+            border-radius: 15px;
+            border-color: rgb(0, 67, 202);
+            margin-top: 45%;
+            margin-left: 2.5%;
+        }
+
+        /* Controls CSS */
+
+        #controlTextDiv {
+            width: 37.5%;
+            height: 20%;
+            Display: flex;
+            flex-direction: column;
+            position: absolute;
+            border-radius: 15px;
+            background-color: rgb(230, 119, 0);
+            margin-top: 3%;
+            margin-left: 10%;
+        }
+
+        #controlText1 {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 20px;
+            color: white;
+            margin-bottom: -1.5%;
+        }
+
+        #controlText2 {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 20px;
+            color: white;
+            margin-bottom: -1.5%;
+        }
+
+        #controlText3 {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 20px;
+            color: white;
+        }
+
+        #controlTextHeading {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 27.5px;
+            color: white;
+            margin-bottom: -0.5%;
+            font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
+        }
+
+        /* Objective Text CSS */
+
+        #objectiveTextDiv {
+            width: 37.5%;
+            height: 30%;
+            Display: flex;
+            flex-direction: column;
+            position: absolute;
+            border-radius: 15px;
+            background-color: rgb(230, 119, 0);
+            margin-top: 15%;
+            margin-left: 10%;
+        }
+
+        #objectiveTextHeading {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 27.5px;
+            color: white;
+            margin-bottom: -0.5%;
+            font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
+        }
+
+        #objectiveText {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 20px;
+            color: white;
+        }
+
+        /* Tokens Text CSS */
+
+        #tokensTextDiv {
+            width: 37.5%;
+            height: 15%;
+            Display: flex;
+            flex-direction: column;
+            position: absolute;
+            border-radius: 15px;
+            background-color: rgb(230, 119, 0);
+            margin-top: 15%;
+            margin-left: 52.5%;
+        }
+
+        #tokensTextHeading {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 27.5px;
+            color: white;
+            margin-bottom: -0.5%;
+            font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
+        }
+
+        #tokensText {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 20px;
+            color: white;
+        }
+
+        /* Tips Text CSS */
+
+        #tipsTextDiv {
+            width: 37.5%;
+            height: 20%;
+            Display: flex;
+            flex-direction: column;
+            position: absolute;
+            border-radius: 15px;
+            background-color: rgb(230, 119, 0);
+            margin-top: 3%;
+            margin-left: 52.5%;
+        }
+
+        #tipsText1 {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 20px;
+            color: white;
+            margin-bottom: -1.5%;
+        }
+
+        #tipsText2 {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 20px;
+            color: white;
+            margin-bottom: -1.5%;
+        }
+
+        #tipsTextHeading {
+            font-family: 'Pixelify Sans', sans-serif;
+            font-size: 27.5px;
+            color: white;
+            margin-bottom: -0.5%;
+            font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <!-- Help Button -->
+    <button onclick="helpToMain()" id="helpToMainButton">Go Back to the Main Page</button>
+    
+    <script> 
+        // Create an astronaut 
+        let astronautPlayer
+
+        function preload() {
+            astronautPlayer = loadImage('Walking Left Player Astronaut.png')
+        }
+
+        // Start the game when they click the "Start Game" button
+        function helpToMain() {
+            location.href = "index.html"
+        }
+    </script>
+</body>
+</html>
